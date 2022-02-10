@@ -90,3 +90,33 @@
 
 }
 
+.left-box  {
+    background: #f7924a;
+    height: 100vh;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 45vw;
+    border-width: 0;
+    padding: 2rem 1rem 1rem;
+    display: inline;
+    padding-right: 10rem;
+
+}
+
+.left-box :after {
+    background: #fff;
+    -webkit-clip-path: ellipse(48% 94% at 50% 100%);
+    clip-path: ellipse(37% 57% at 66% 50%);
+    content: "";
+    height: 100vh;
+    position: absolute;
+    right: -91px;
+    top: 0;
+    width: 315px;
+    text-align: left;
+}
+
+.left-hesd{
+    text-align: justify;
+}
