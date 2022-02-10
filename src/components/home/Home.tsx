@@ -43,7 +43,10 @@ export class Homepage extends React.Component
                         <span>form fill akku and get mingled.</span>
                     </p>
                 </div>
+
             </>
         );
     }
 }
+
+export default Homepage;

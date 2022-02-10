@@ -17,6 +17,8 @@ import {createTheme} from "@mui/material/styles";
 import Chat from "./components/Chat";
 import Swiper from "./components/Chat/Swiper";
 import {Homepage} from "./components/home/Home";
+import { Page1 } from "./components/home/page1";
+import {Mingle} from "./components/home/mingle";
 // import {Desktop} from "./components/home/Destop";
 
 
@@ -90,6 +92,12 @@ class AppLoc extends React.Component<AppProps>
                         <Route path="/chat"><Swiper/></Route>
                         <Route path="/set_token/">
                             <HandleToken/>
+                        </Route>
+                        <Route path="/mingle/">
+                            <Mingle/>
+                        </Route>
+                        <Route path="/page1/">
+                            <Page1/>
                         </Route>
                         <Route path="/">
                             {/*<Index/>*/}

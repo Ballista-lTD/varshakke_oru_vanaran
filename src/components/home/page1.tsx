@@ -7,6 +7,8 @@ import Luv from "../../images/luv.svg";
 import Luv1 from "../../images/luv1.svg";
 import Luv2 from "../../images/luv2.svg";
 import Slider from "../utils/slider/slider";
+import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
+import {withRouter} from "react-router";
 
 interface ruless {
     rule : string;
@@ -15,18 +17,17 @@ interface ruless {
 const rules: ruless[] = [{rule: "maryadak ullathu ole parayanam", icon: Luv}, {rule: "maryadak ullathu ole parayanam", icon: Luv1}, {rule: "maryadak ullathu ole parayanam", icon: Luv2}];
 
 
-export class Page1 extends React.Component
+class Page1Loc extends AuthComponent<AuthPropsLoc, AuthState>
 {
     render()
     {
         return (
-            <div className=" overflow-hidden" color="black">
+            <div className=" overflow-hidden vh-100" color="black">
                 <div className="d-flex flex-row justify-content-between">
                     <div>
-
                         <img src={Build} className="align-self-start position-absolute w-75" alt="fire"/>
                     </div>
-                    <Typography fontFamily="Poppins" className="align-self-end mt-5 pt-3 text-wrap pe-4" fontWeight="bold"
+                    <Typography fontFamily="Poppins" className="align-self-end mt-5 pt-3 text-wrap pe-4" fontWeight="bolder"
                         fontSize="28px" width="230px">HACKS
                         TO GET MINGLED</Typography>
                 </div>
@@ -45,9 +46,22 @@ export class Page1 extends React.Component
                                     </ListItem>
                                 ))}
                         </List></Typography>
-                    <Slider text=" "/>
-                    <img className="w-75 align-bottom py-0" src={Fire} alt="fire"/>
+                    <div className={"w-100 position-relative d-flex flex-column align-items-center overflow-visible"}>
+                        <img className="vw-100 align-bottom position-absolute py-0 " src={Fire} alt="fire"/>
+                        <div className={"w-75 pt-5 mt-3"}>
+                            <Slider text="Oo Sammathiche" text_unlocked="poda pulle" color="#fff"
+                                onSuccess={()=>
+                                {
+                                    setTimeout(()=>
+                                    {
+                                        this.props.history.push("/mingle");
+                                    }, 500);
+                                }}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>);
     }
 }
+export const Page1 = withRouter(Page1Loc);

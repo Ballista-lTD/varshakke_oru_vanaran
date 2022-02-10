@@ -1,22 +1,22 @@
-import Build from "../../images/build.svg";
+import LeftGarland from "../../images/leftGarland.svg";
+import RightGarland from "../../images/rightGarland.svg";
+
 import LoveIcon from "../../images/qstnIcon.svg";
 
 import Typography from "@mui/material/Typography";
-import Fire from "../../images/fire.svg";
+import Fire from "../../images/minglec.svg";
 import React from "react";
 
 import {styled} from "@mui/material/styles";
 import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import {List, ListItem, ListItemAvatar} from "@mui/material";
 
 
 import Slider from "../utils/slider/slider";
 
-interface questionsPropss
-{
+interface questionsPropss {
     qstn: string;
 }
 
@@ -32,55 +32,65 @@ const StyledRating = styled(Rating)({
 });
 
 
-export class Mingle extends React.Component
+export class Mingle extends React.Component 
 {
-    render()
+    render() 
     {
         return (
             <div className=" overflow-hidden" color="black">
-                <div className="d-flex flex-row justify-content-start">
-                    <img src={Build} className="align-self-start position-absolute w-75" alt="img"/>
+                <div className="vw-100 h-25 d-flex flex-row justify-content justify-content-between position-relative">
+                    <div>
+
+                        <img src={LeftGarland} className="align-self-start position-absolute " alt="img"/>
+                    </div>
+                    <div>
+                        <img src={RightGarland} style={{right: 0}} className="align-self-start  position-absolute "
+                            alt="img"/>
+                    </div>
                 </div>
                 <div className="d-flex justify-content-center w-full">
-                    <Typography fontFamily="Poppins" className="align-self-center mt-5 pt-3 pe-4 w-full"
-                        fontWeight="bold"
-                        fontSize="28px" zIndex={1}>
+                    <Typography fontFamily="Poppins" className="align-self-center mt-5 pt-4 pe-4 w-full"
+                        color="#464646"
+                        fontSize="28px"
+                        zIndex={1}
+                        style={{fontWeight: "900"}}>
                         FILL TO MINGLE
                     </Typography>
                 </div>
                 <div className="py-0 pt-3 d-flex justify-content-center flex-column align-items-center">
-                    <Typography fontFamily="Poppins" className="align-self-end mt-5 pt-3 w-100 text-wrap"
+                    <Typography fontFamily="Poppins" className="align-self-end pt-1 w-100 text-wrap"
                         fontSize="21px" color="#949494">
-                        <List className={"d-flex flex-column justify-content-center align-items-center"}>
+                        <List className={"d-flex flex-column text-left ps-3"}>
                             {questions.map((qstn: questionsPropss) =>
                                 (
 
-                                    <ListItem key={qstn.qstn} className={"d-flex justify-content-center align-items-center"}>
-                                        <div className="d-flex flex-column">
-                                            <div className="d-flex flex-row">
-                                                <ListItemAvatar>
-                                                    <img src={LoveIcon} alt="icon"/>
-                                                </ListItemAvatar>
-                                                {qstn.qstn}
-                                            </div>
+                                    <ListItem key={qstn.qstn} className={"d-flex align-items-start flex-column"}>
+                                        <div className="d-flex flex-row">
+                                            <ListItemAvatar>
+                                                <img src={LoveIcon} alt="icon"/>
+                                            </ListItemAvatar>
+                                            {qstn.qstn}
+                                        </div>
+                                        <div className={"ps-5  w-75"}>
+
                                             <StyledRating
                                                 name="customized-color"
-                                                className="d-flex align-self-center"
+                                                className="d-flex w-100 align-self-center "
                                                 defaultValue={2}
                                                 getLabelText={(value: number) => `${value} Heart${value !== 1 ? "s" : ""}`}
                                                 precision={1}
-                                                icon={<FavoriteIcon fontSize="inherit"/>}
-                                                emptyIcon={<FavoriteBorderIcon fontSize="inherit"/>}
+                                                icon={<FavoriteIcon className={"mx-2 me-3"}  fontSize="inherit"/>}
+                                                emptyIcon={<FavoriteIcon  className={"mx-2 me-3"} fontSize="inherit"/>}
                                             />
                                         </div>
                                     </ListItem>
 
                                 ))}
                         </List></Typography>
-                    <div className="w-50">
+                    <div className="w-75">
                         <Slider text="Send" color="#fff" text_unlocked="Happy Dating"/>
                     </div>
-                    <img className="w-75 align-bottom py-0" src={Fire} alt="button"/>
+                    <img className="w-100 align-bottom py-0" src={Fire} alt="button"/>
                 </div>
             </div>);
     }
