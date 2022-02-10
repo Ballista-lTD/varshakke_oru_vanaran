@@ -1,0 +1,130 @@
+
+.blue-gradient {
+    background: linear-gradient(30deg, #3a77ff, #1e7dff, #1e7dff, #008cff,
+    #008cff, #009dff, #009dff, #00adfe, #00b9f5, #00c2ee, #16c5eb);
+}
+.text-blue-gradient {
+     color:  #001e62
+
+}
+
+.green-gradient {
+    background: linear-gradient(30deg, #39b54a, #40b94b, #47be4c, #4dc24c,
+    #54c74d, #5acb4e, #61d04e, #67d44f, #6ed950, #74dd50, #7be251, #81e651);
+}
+
+.glass_card_backing {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px) saturate(120%) contrast(65%) brightness(130%);
+    content: '';
+    position: absolute;
+    height: 190px;
+    border-radius: 15px;
+    width: 92.5%;
+}
+
+
+.glass_card {
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    height: 190px;
+}
+
+.round-15 {
+    border-radius: 5px;
+}
+
+.usertext {
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.250291px;
+    margin-left: 1.5rem;
+    color: #222B45;
+    margin-bottom: .5rem;
+    text-align: left;
+}
+.problem {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.266977px;
+    margin-left: 2rem;
+    padding-top: 18px;
+    color: #23374D;
+    text-align: left;
+}
+.probsec {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    margin-left: 2rem;
+    letter-spacing: 0.233605px;
+    color: #6B779A;
+    text-align: left;
+}
+.helpbar {
+    width: 100%;
+    height: 5rem;
+    margin-top: 1rem;
+    background: rgba(107, 119, 154, 0.05);
+    border-radius: 20px;
+
+}
+.needmedi {
+    box-shadow: 0 25px 58px rgba(62, 100, 255, 0.3);
+    width: 100%;
+
+}
+.rigtharrow {
+    width: 42.96px;
+    height: 40px;
+    float: right;
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+.iconimg {
+    margin-top: 13px;
+}
+.servicehead {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.300349px;
+    color: #222B45;
+    margin-top: 1.25rem;
+    margin-left: 1rem;
+}
+.homecard {
+    width: 31.5%;
+    height: 133px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(107, 119, 154, 0.05);
+    border-radius: 20px;
+}
+.hospnear {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.300349px;
+    color: #222B45;
+}
+#searchresults {
+    padding-left: 0;
+    padding-right: 0;
+}
+.cardtxt {
+    color: #222B45;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 1rem;
+    line-height: .8rem;
+}
