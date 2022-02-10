@@ -3,21 +3,34 @@ import "./style.css";
 import bgimg from "./home_love.png";
 import bg2 from "./love2.png";
 
-class Homepage extends React.Component
+export  class Balloon extends React.Component
+{
+    render()
+    {
+        return (
+            <div>
+                <h2 className='heading'>
+                    Varshakkoru Vanaran
+                </h2>
+                <img className="bg1-img" src={bg2} alt="love"/>
+                <div className="bg-image-container">
+
+                    <img className="bg-img" src={bgimg} alt="love"/>
+                </div>
+            </div>
+        );
+    }
+}
+
+
+export class Homepage extends React.Component
 {
     render()
     {
         return (
             <>
                 <div className='Home-bg'>
-                    <h2 className='heading'>
-                        Varshakkoru Vanaran
-                    </h2>
-                    <img className="bg1-img" src={bg2} alt="love"/>
-                    <div className="bg-image-container">
-
-                        <img className="bg-img" src={bgimg} alt="love"/>
-                    </div>
+                    <Balloon/>
 
                 </div>
                 <div className="p-2 px-5">
@@ -26,7 +39,7 @@ class Homepage extends React.Component
                     </h2>
                     <p className="description">
                         ith oru mikacha oru ithanu. ithine kurich parayukayanengil namukk orupad parayan ind but nammak
-                        samayam illa so poyi  <br/>
+                        samayam illa so poyi <br/>
                         <span>form fill akku and get mingled.</span>
                     </p>
                 </div>
@@ -34,5 +47,3 @@ class Homepage extends React.Component
         );
     }
 }
-
-export default Homepage;
