@@ -1,5 +1,5 @@
 import "./bootstrap.min.css";
-import {Index} from "./components/Index";
+// import {Index} from "./components/Index";
 import React from "react";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
 import {getParam} from "./api/QueryCreator";
@@ -16,6 +16,8 @@ import {createTheme} from "@mui/material/styles";
 
 import Chat from "./components/Chat";
 import Swiper from "./components/Chat/Swiper";
+import Homepage from "./components/home/Home";
+
 
 
 const theme = createTheme({
@@ -83,14 +85,14 @@ class AppLoc extends React.Component<AppProps>
                 <ThemeProvider theme={theme}>
 
                     <Switch>
-
                         <Route path="/chat/:chatId"><Chat/></Route>
                         <Route path="/chat"><Swiper/></Route>
                         <Route path="/set_token/">
                             <HandleToken/>
                         </Route>
                         <Route path="/">
-                            <Index/>
+                            {/*<Index/>*/}
+                            <Homepage/>
                         </Route>
                     </Switch>
                 </ThemeProvider>
