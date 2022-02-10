@@ -1,6 +1,6 @@
 .Home-bg {
     background: #f7924a;
-    height:54vh;
+    height: 54vh;
     overflow: hidden;
     position: relative;
     width: 100vw;
@@ -21,7 +21,7 @@
     right: -10%;
 }
 
-.Home-bg .heading {
+.heading {
 
     width: 258px;
     height: 108px;
@@ -34,21 +34,23 @@
     font-size: 36px;
     line-height: 54px;
     letter-spacing: 0.02em;
-
     color: #FFFFFF;
 }
-.bg-img{
-        z-index: 1000;
+
+.bg-img {
+    z-index: 1000;
     position: relative;
     width: 12rem;
 }
-.bg1-img{
+
+.bg1-img {
     width: 5rem;
     top: 94px;
     left: 195px;
     position: absolute;
 }
-.sub-head{
+
+.sub-head {
     font-family: Poppins;
     font-style: normal;
     font-weight: bold;
@@ -58,7 +60,7 @@
     color: #464646;
 }
 
-.description{
+.description {
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
@@ -67,7 +69,24 @@
     text-align: center;
     color: #949494;
 }
-.description span{
+
+.description span {
     color: #F7924A;
 
 }
+
+/*here end the mobile version*/
+
+/*adutha bellodu kode desk top kali thudangukyanu*/
+
+
+.left-box {
+    background: #f7924a;
+    height: 100vh;
+
+    width: 45vw;
+    border-width: 0;
+    padding: 2rem 1rem 1rem;
+
+}
+
