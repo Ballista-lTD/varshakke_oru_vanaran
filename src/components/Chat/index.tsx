@@ -5,7 +5,6 @@ import SignalConnection, {ChatMessage} from "./lib";
 import {Link} from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import Account from "../../images/ventilator.svg";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import IconButton from "@mui/material/IconButton";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
@@ -18,7 +17,6 @@ import DoneIcon from "@mui/icons-material/Done";
 import React, {ChangeEvent, createRef, CSSProperties} from "react";
 import localForage from "localforage";
 import Typography from "@mui/material/Typography";
-// import Button from "@mui/material/Button";
 import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
@@ -182,7 +180,6 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
                             <ArrowBackIcon sx={{color: "#4F5E7B"}}/>
                         </Link>
 
-                        <img style={{borderRadius: "50%", marginLeft: "1rem"}} src={Account} alt=""/>
                         <div style={{marginLeft: "1rem", paddingTop: "1rem"}} className="d-flex flex-column text-start">
                             <div className="h5 m-0 fw-bold">{this.state.chatUser.name}</div>
                             <div>Last seen on {this.state.chatUser.last_seen}</div>

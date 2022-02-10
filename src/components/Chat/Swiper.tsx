@@ -3,15 +3,9 @@ import SwipeableViews from "react-swipeable-views";
 import Tabs from "@mui/material/Tabs";
 import Box from "@mui/material/Box";
 import "./Swiper.css";
-import Fab from "@mui/material/Fab";
-import Plus from "../../images/chat_plus.svg";
 import SearchIcon from "@mui/icons-material/Search";
-import chat from "../../images/chat_bw.svg";
-import recent from "../../images/recent_bw.svg";
-import call from "../../images/call_bw.svg";
-import contact from "../../images/contact_bw.svg";
 import {Link} from "react-router-dom";
-import {Avatar, Tab} from "@mui/material";
+import {Avatar} from "@mui/material";
 import {AuthComponent, AuthPropsLoc, AuthState, refresh_user} from "../../api/auth";
 import {withRouter} from "react-router";
 import SignalConnection from "./lib";
@@ -100,10 +94,6 @@ class SwiperLoc extends AuthComponent<AuthPropsLoc, SwiperState>
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab icon={<img src={chat} alt=""/>}/>
-                    <Tab icon={<img src={recent} alt=""/>}/>
-                    <Tab icon={<img src={call} alt=""/>}/>
-                    <Tab icon={<img src={contact} alt=""/>}/>
                 </Tabs>
 
                 <SwipeableViews
@@ -134,13 +124,6 @@ class SwiperLoc extends AuthComponent<AuthPropsLoc, SwiperState>
                                         }}>
                                             Pinned Chats
                                         </div>
-
-                                        {/*<img style={{*/}
-                                        {/*    height: "3rem",*/}
-                                        {/*    borderRadius: "100%",*/}
-                                        {/*    marginRight: "1rem",*/}
-                                        {/*    alignItems: "center"*/}
-                                        {/*}} src={Account} alt={"profile"}/>*/}
                                         <Avatar src={this.state.user?.tokens?.profile || undefined} variant="rounded"
                                             sx={{
                                                 height: "2.5rem",
@@ -149,46 +132,6 @@ class SwiperLoc extends AuthComponent<AuthPropsLoc, SwiperState>
                                                 alignItems: "center"
                                             }}>{this.state.user?.username ? this.state.user.username[0] : "?"}</Avatar>
                                     </div>
-
-                                    {/*<div className="chat-main d-flex flex-wrap justify-content-around m-2 pb-2"*/}
-                                    {/*    style={{maxHeight: "30vh", overflow: "auto"}}>*/}
-
-                                    {/*    <div className="p-1" style={{*/}
-                                    {/*        width: "40%",*/}
-                                    {/*        height: "50%",*/}
-                                    {/*        background: "#F7F7F7",*/}
-                                    {/*        marginTop: "1rem",*/}
-                                    {/*        borderRadius: "8px"*/}
-                                    {/*    }}>*/}
-                                    {/*        <div className="d-flex p-2">*/}
-                                    {/*            <div style={{marginRight: "1rem", height: "2.5rem"}} className="d-flex">*/}
-                                    {/*                <img style={{borderRadius: "100%", alignItems: "center"}}*/}
-                                    {/*                    src={Account} alt={"profile"}/>*/}
-                                    {/*                <div style={{*/}
-                                    {/*                    width: "10px",*/}
-                                    {/*                    height: "10px",*/}
-                                    {/*                    borderRadius: "50%",*/}
-                                    {/*                    background: "#4CE417",*/}
-                                    {/*                    alignSelf: "end",*/}
-                                    {/*                    marginBottom: "1px",*/}
-                                    {/*                    marginLeft: "-13px"*/}
-                                    {/*                }}/>*/}
-                                    {/*            </div>*/}
-                                    {/*            <p style={{fontSize: ".8rem", textAlign: "left", color: "#1B1A57"}}>Name*/}
-                                    {/*                of a person</p>*/}
-                                    {/*        </div>*/}
-
-                                    {/*        <div className="d-flex justify-content-center align-items-center px-2 mb-2">*/}
-                                    {/*            <ReplyIcon sx={{height: "1rem"}} color="action"/>*/}
-                                    {/*            <p className="d-flex justify-content-center align-items-center mb-0"*/}
-                                    {/*                style={{fontSize: ".7rem", textAlign: "left", color: "#4F5E7B"}}>Some*/}
-                                    {/*                chat here...</p>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-
-
-                                    {/*</div>*/}
-
                                 </div>
 
                             </div>
@@ -222,9 +165,6 @@ class SwiperLoc extends AuthComponent<AuthPropsLoc, SwiperState>
                                         (<Link to={`/chat/${friend.token}`} key={i}>
                                             <div className="d-flex">
                                                 <div className="ms-2 me-1 d-flex">
-                                                    {/*<img className="align-items-center"*/}
-                                                    {/*    style={{borderRadius: "100%", height: "3rem"}} src={Account}*/}
-                                                    {/*    alt={"profile"}/>*/}
                                                     <Avatar src={friend.name || undefined} variant="rounded" sx={{
                                                         height: "2.5rem",
                                                         borderRadius: "50%",
@@ -250,25 +190,11 @@ class SwiperLoc extends AuthComponent<AuthPropsLoc, SwiperState>
                                                     className="d-flex flex-column align-items-center">
                                                     <p style={{color: "#4F5E7B"}}
                                                         className="m-0">{friend.last_seen && this.getTime(new Date(friend.last_seen))}</p>
-                                                    {/*<div style={{*/}
-                                                    {/*    width: "24px",*/}
-                                                    {/*    height: "24px",*/}
-                                                    {/*    borderRadius: "50%",*/}
-                                                    {/*    background: "blue",*/}
-                                                    {/*    color: "#FFFFFF"*/}
-                                                    {/*}}>3*/}
-                                                    {/*</div>*/}
                                                 </div>
                                             </div>
                                         </Link>)
                                     )}
                                 </div>
-
-                                <Fab style={{position: "fixed", bottom: 30, right: 20, background: "#385FF6"}}
-                                    color="primary" aria-label="add">
-                                    <img src={Plus} alt={"plus"}/>
-                                </Fab>
-
                             </div>
 
                         </div>
