@@ -5,7 +5,7 @@ import bg2 from "./love2.png";
 
 class Homepage extends React.Component
 {
-    render() 
+    render()
     {
         return (
             <>
