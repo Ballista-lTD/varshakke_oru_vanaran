@@ -1,11 +1,10 @@
 import React from "react";
 import "./style.css";
 import {Balloon} from "./Home";
+import banner from "./banner.png";
 
-export class Desktop extends React.Component
-{
-    render()
-    {
+export class Desktop extends React.Component {
+    render() {
         return (
             <>
                 <div className="p-0 d-flex">
@@ -23,7 +22,7 @@ export class Desktop extends React.Component
                         </h4>
                     </div>
                     <div className='right-box d-inline '>
-
+                        <img src={banner} alt={"banner"} className={"banner-image"} />
                     </div>
                 </div>
 
