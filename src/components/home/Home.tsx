@@ -2,6 +2,9 @@ import React from "react";
 import "./style.css";
 import bgimg from "./home_love.png";
 import bg2 from "./love2.png";
+import Slider from "../utils/slider/slider";
+import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
+import {withRouter} from "react-router";
 
 export  class Balloon extends React.Component
 {
@@ -23,7 +26,7 @@ export  class Balloon extends React.Component
 }
 
 
-export class Homepage extends React.Component
+export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
 {
     render()
     {
@@ -42,8 +45,25 @@ export class Homepage extends React.Component
                         samayam illa so poyi <br/>
                         <span>form fill akku and get mingled.</span>
                     </p>
+                    {
+                        //TODO: reverse this check
+                        this.state.user?
+                            <Slider text="Get Started" color="#fff" text_unlocked="Go on"
+                                onSuccess={this.performAuth}
+                            />:
+                            <Slider text="Get Started" color="#fff" text_unlocked="Go on"
+                                onSuccess={()=>
+                                {
+                                    this.props.history.push("/page1");
+                                }}
+                            />
+
+                    }
                 </div>
+
             </>
         );
     }
 }
+
+export  const Homepage = withRouter(HomepageLoc);
