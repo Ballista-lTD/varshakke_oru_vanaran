@@ -44,20 +44,8 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
                         Place to find your valentines <br/>
                         <span>form fill akku and get mingled.</span>
                     </p>
-                    {
-                        //TODO: reverse this check
-                        this.state.user?
-                            <Slider text="Get Started" color="#fff" text_unlocked="Go on"
-                                onSuccess={this.performAuth}
-                            />:
-                            <Slider text="Get Started" color="#fff" text_unlocked="Go on"
-                                onSuccess={()=>
-                                {
-                                    this.props.history.push("/page1");
-                                }}
-                            />
-
-                    }
+                    <Slider text="Get Started" color="#fff" text_unlocked="Go on"
+                        onSuccess={() => this.state.user? this.performAuth() : this.props.history.push("/page1")}/>
                 </div>
 
             </>

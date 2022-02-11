@@ -48,6 +48,23 @@ export async function post(url: RequestInfo, kwargs = {}, headers = {})
     }
 }
 
+export async function patch(url: RequestInfo, kwargs = {}, headers = {})
+{
+    const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            ...headers
+        },
+        body: JSON.stringify(kwargs)
+    });
+
+    if (response.status > 300)
+        throw (response);
+
+    return response.json();
+}
+
 export async function filePost(url: RequestInfo, formData: FormData, headers = {})
 {
     const response = await fetch(url, {
@@ -84,30 +101,6 @@ export async function filePatch(url: RequestInfo, formData: FormData, headers = 
         throw (response);
     else
         return response.json();
-}
-
-
-export async function patch(url: RequestInfo, kwargs = {}, headers = {})
-{
-    const response = await fetch(url, {
-        method: "PATCH", // *GET, POST, PUT, DELETE, etc.
-        headers: {
-            "Content-Type": "application/json",
-            ...headers
-        },
-        body: JSON.stringify(kwargs)
-    }
-    );
-    if (response.status > 300)
-    
-        throw (response);
-    
-    else
-    {
-
-        console.log(response);
-        return response.json();
-    }
 }
 
 export interface ModelData
@@ -156,7 +149,7 @@ export class ModelObject
         {
             this.setData();
             const headers = {"Authorization": `Bearer ${getAuth()}`};
-            return await post(`${this.baseUrl}${this.id}/${path}`, data, headers);
+            return await patch(`${this.baseUrl}${this.id}/${path}`, data, headers);
         }
         catch (e)
         {
@@ -261,6 +254,20 @@ export default class Model
         {
             const headers = {"Authorization": `Bearer ${getAuth()}`};
             const data = await post(`${this.baseurl}${path}`, kwargs, headers);
+            return new this.modelClass(data, this.baseurl);
+        }
+        catch (e)
+        {
+            throw await (e as { json: () => Promise<unknown> }).json();
+        }
+    }
+
+    async modify(kwargs = {id: 0})
+    {
+        try
+        {
+            const headers = {"Authorization": `Bearer ${getAuth()}`};
+            const data = await patch(`${this.baseurl}${kwargs.id}/`, kwargs, headers);
             return new this.modelClass(data, this.baseurl);
         }
         catch (e)
