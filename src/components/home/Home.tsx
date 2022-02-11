@@ -13,7 +13,7 @@ export  class Balloon extends React.Component
         return (
             <div>
                 <h2 className='heading'>
-                    Minglikkoo
+                    Minglikko
                 </h2>
                 <img className="bg1-img" src={bg2} alt="love"/>
                 <div className="bg-image-container">
@@ -41,8 +41,7 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
                         ITHINE KURICH ORU VAKK
                     </h2>
                     <p className="description">
-                        ith oru mikacha oru ithanu. ithine kurich parayukayanengil namukk orupad parayan ind but nammak
-                        samayam illa so poyi <br/>
+                        Place to find your valentines <br/>
                         <span>form fill akku and get mingled.</span>
                     </p>
                     {
