@@ -20,13 +20,13 @@ interface questionsPropss {
     qstn: string;
 }
 
-const questions: questionsPropss[] = [{qstn: "You Smart? \n(0: Brain Potato, 5: Omniscient"},
-    {qstn: "Show me your biceps. \n(0: pappadavaanam, 5: Hercules)"},
+const questions: questionsPropss[] = [{qstn: "Rate your Brains.🧠 \n(0: Brain Potato, 5: Omniscient"},
+    {qstn: "Show me your biceps.💪 \n(0: Pappadam, 5: Hercules)"},
     {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)"},
-    {qstn: "Your Charisma. \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)"},
-    {qstn: "How much money you burn. \n(0: Starving to Death) \n(5:I pave golden roads)"},
-    {qstn: "Generosity, yes rate it. \n(0: I burn orphanages, 5:Karl Marx)"},
-    {qstn: "You die for God? I am become Death. \n(0:-J Robert Oppenheimer, 5: -Krishna)"},
+    {qstn: "How Charismatic you are? \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)"},
+    {qstn: "How much money you burn?🤑\t \n(0: Starving to Death) \n(5:I pave golden roads)"},
+    {qstn: "Generosity, yes rate it.😇\t \n(0: I burn orphanages, 5:Karl Marx)"},
+    {qstn: "You die for God? \n(0: I am become Death. -J Robert Oppenheimer) \n(5: I am become Death. -Krishna)"},
     {qstn: "Your connection with Liberalism🧐 \n(0:Girls? No School!!) \n(5:Martin Luther King)"}, ];
 
 const StyledRating = styled(Rating)({

@@ -14,7 +14,7 @@ interface ruless {
     rule : string;
     icon : string;
 }
-const rules: ruless[] = [{rule: "maryadak ullathu ole parayanam", icon: Luv}, {rule: "maryadak ullathu ole parayanam", icon: Luv1}, {rule: "maryadak ullathu ole parayanam", icon: Luv2}];
+const rules: ruless[] = [{rule: "Never lie to your doctor \nand a̶t̶t̶o̶r̶n̶e̶y̶, Valentine!", icon: Luv}, {rule: "Adhikam thallanda max 20 \npointse kayyilollu", icon: Luv1}, {rule: "Come back on Feb14 to \nchat with your Valentine🎉🎉  \nEnnaa pinne Minglikko..", icon: Luv2}];
 
 
 class Page1Loc extends AuthComponent<AuthPropsLoc, AuthState>
@@ -41,7 +41,7 @@ class Page1Loc extends AuthComponent<AuthPropsLoc, AuthState>
                         <List className={"d-flex flex-column justify-content-center align-items-center"}>
                             {rules.map((rule: ruless) =>
                                 (
-                                    <ListItem key={rule.rule} className={"justify-content-center align-items-center"}>
+                                    <ListItem key={rule.rule} style={{left:0, whiteSpace:"pre"}}>
                                         <ListItemAvatar>
                                             <Avatar alt="Cindy Baker" src={rule.icon}/>
                                         </ListItemAvatar>

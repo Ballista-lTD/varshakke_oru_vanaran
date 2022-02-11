@@ -1,9 +1,7 @@
 import "./bootstrap.min.css";
 // import {Index} from "./components/Index";
-import React from "react";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
-import {getParam} from "./api/QueryCreator";
-import {HandleToken, refresh_user} from "./api/auth";
+import {HandleToken} from "./api/auth";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
@@ -16,11 +14,9 @@ import {createTheme} from "@mui/material/styles";
 
 import Chat from "./components/Chat";
 import Swiper from "./components/Chat/Swiper";
-import {Homepage} from "./components/home/Home";
-import { Page1 } from "./components/home/page1";
+import {Page1} from "./components/home/page1";
 import {Mingle} from "./components/home/mingle";
-// import {Desktop} from "./components/home/Destop";
-
+import {Index} from "./components/Index";
 
 
 const theme = createTheme({
@@ -32,6 +28,7 @@ const theme = createTheme({
         success: green,
     }
 });
+
 
 interface AppRouterProps
 {
@@ -52,36 +49,35 @@ class AppLoc extends React.Component<AppProps>
     constructor(props: AppProps)
     {
         super(props);
-        const location = this.props.location.pathname + this.props.location.search;
-        this.props.history.replace(location);
-        refresh_user();
+
     }
 
     /**
      * componentDidMount() method allows us to execute the React code even after component is rendered
      */
-    componentDidMount()
-    {
-        getParam("lat", "", true);
-        getParam("lng", "", true);
-        getParam("loc", "Search Location", true);
-        getParam("query", "Search Hospital", true);
-    }
+    // componentDidMount()
+    // {
+    //     getParam("lat", "", true);
+    //     getParam("lng", "", true);
+    //     getParam("loc", "Search Location", true);
+    //     getParam("query", "Search Hospital", true);
+    // }
 
     /**
      * componentDidUpdate() method use to execute the code when the state of component changes
      */
-    componentDidUpdate()
-    {
-        getParam("lat", "", true);
-        getParam("lng", "", true);
-        getParam("loc", "Search Location", true);
-        getParam("query", "Search Hospital", true);
-    }
+    // componentDidUpdate()
+    // {
+    //     getParam("lat", "", true);
+    //     getParam("lng", "", true);
+    //     getParam("loc", "Search Location", true);
+    //     getParam("query", "Search Hospital", true);
+    // }
+
+
 
     render()
     {
-
 
         return (
             <div className="App">
@@ -100,9 +96,14 @@ class AppLoc extends React.Component<AppProps>
                             <Page1/>
                         </Route>
                         <Route path="/">
-                            {/*<Index/>*/}
-                            <Homepage/>
+                            {/*{(this.width < 768) ?*/}
+                            {/*    <Homepage/>*/}
+                            {/*    : <Desktop/>*/}
+                            {/*}*/}
+
+                            <Index/>
                             {/*<Desktop/>*/}
+
                         </Route>
                     </Switch>
                 </ThemeProvider>

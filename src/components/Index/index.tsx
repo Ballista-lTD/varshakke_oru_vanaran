@@ -4,8 +4,8 @@ import {withRouter} from "react-router";
 
 import "./index.css";
 import {getParam} from "../../api/QueryCreator";
-
-
+import {Desktop} from "../home/Destop";
+import {Homepage} from "../home/Home";
 
 
 interface IndexState extends AuthState
@@ -13,7 +13,7 @@ interface IndexState extends AuthState
     display: boolean
     lat?: string,
     lng?: string,
-    activestep:number,
+    activestep: number,
 }
 
 /**
@@ -32,13 +32,13 @@ class IndexLoc extends AuthComponent<AuthPropsLoc, IndexState>
             ...this.state,
             display: true,
             lat, lng,
-            activestep:0,
+            activestep: 0,
         };
     }
-    
+
     handleStepChange = (step: number) =>
     {
-        this.setState({activestep:step});
+        this.setState({activestep: step});
     };
 
     /**
@@ -49,12 +49,16 @@ class IndexLoc extends AuthComponent<AuthPropsLoc, IndexState>
     render()
     {
 
+        if (this.state.width > 300)
+        
+            return (
+                <Desktop/>
+            );
+        
         return (
-            <React.Fragment>
+            <Homepage/>
+        );
 
-            </React.Fragment>);
     }
-
 }
-
-export const Index = withRouter(IndexLoc);
+export  const Index = withRouter(IndexLoc);
