@@ -21,6 +21,11 @@ class Page1Loc extends AuthComponent<AuthPropsLoc, AuthState>
 {
     render()
     {
+
+        if (!this.state.user)
+        
+            this.performAuth();
+        
         return (
             <div className=" overflow-hidden vh-100" color="black">
                 <div className="d-flex flex-row justify-content-between">

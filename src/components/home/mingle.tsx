@@ -20,7 +20,14 @@ interface questionsPropss {
     qstn: string;
 }
 
-const questions: questionsPropss[] = [{qstn: "Ningalk ethra budhi ind"}, {qstn: "Ningalk ichiri kannil chora indo"}, {qstn: "Ningal ethra dayalu anh"}, {qstn: "Ningalk etra deshyam ond"}, {qstn: "NNingalk etra nalla chiri und"}];
+const questions: questionsPropss[] = [{qstn: "You Smart? \n(0: Brain Potato, 5: Omniscient"},
+    {qstn: "Show me your biceps. \n(0: pappadavaanam, 5: Hercules)"},
+    {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)"},
+    {qstn: "Your Charisma. \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)"},
+    {qstn: "How much money you burn. \n(0: Starving to Death) \n(5:I pave golden roads)"},
+    {qstn: "Generosity, yes rate it. \n(0: I burn orphanages, 5:Karl Marx)"},
+    {qstn: "You die for God? I am become Death. \n(0:-J Robert Oppenheimer, 5: -Krishna)"},
+    {qstn: "Your connection with Liberalism🧐 \n(0:Girls? No School!!) \n(5:Martin Luther King)"}, ];
 
 const StyledRating = styled(Rating)({
     "& .MuiRating-iconFilled": {
@@ -37,7 +44,7 @@ export class Mingle extends React.Component
     render() 
     {
         return (
-            <div className=" overflow-hidden" color="black">
+            <div className=" mb-5" color="black">
                 <div className="vw-100 h-25 d-flex flex-row justify-content justify-content-between position-relative">
                     <div>
 
@@ -57,7 +64,10 @@ export class Mingle extends React.Component
                         FILL TO MINGLE
                     </Typography>
                 </div>
+
                 <div className="py-0 pt-3 d-flex justify-content-center flex-column align-items-center">
+                    <img className="w-100 align-bottom py-0 position-absolute" src={Fire} alt="button"/>
+
                     <Typography fontFamily="Poppins" className="align-self-end pt-1 w-100 text-wrap"
                         fontSize="21px" color="#949494">
                         <List className={"d-flex flex-column text-left ps-3"}>
@@ -69,7 +79,7 @@ export class Mingle extends React.Component
                                             <ListItemAvatar>
                                                 <img src={LoveIcon} alt="icon"/>
                                             </ListItemAvatar>
-                                            {qstn.qstn}
+                                            <span   style={{fontSize:"16px", whiteSpace:"pre"}}>{qstn.qstn}</span>
                                         </div>
                                         <div className={"ps-5  w-75"}>
 
@@ -79,18 +89,16 @@ export class Mingle extends React.Component
                                                 defaultValue={2}
                                                 getLabelText={(value: number) => `${value} Heart${value !== 1 ? "s" : ""}`}
                                                 precision={1}
-                                                icon={<FavoriteIcon className={"mx-2 me-3"}  fontSize="inherit"/>}
-                                                emptyIcon={<FavoriteIcon  className={"mx-2 me-3"} fontSize="inherit"/>}
+                                                icon={<FavoriteIcon className={"mx-2 me-3"} fontSize="inherit"/>}
+                                                emptyIcon={<FavoriteIcon className={"mx-2 me-3"} fontSize="inherit"/>}
                                             />
                                         </div>
                                     </ListItem>
-
                                 ))}
                         </List></Typography>
                     <div className="w-75">
                         <Slider text="Send" color="#fff" text_unlocked="Happy Dating"/>
                     </div>
-                    <img className="w-100 align-bottom py-0" src={Fire} alt="button"/>
                 </div>
             </div>);
     }

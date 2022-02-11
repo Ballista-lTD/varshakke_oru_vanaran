@@ -10,7 +10,7 @@ import {LanguageObject} from "./model";
 import localForage from "localforage";
 
 
-const client_id = "6tWdAZrlxUA26FJSMjE7oKBpTNGaqJRl2bsmNMRb";
+const client_id = "puA76WSCrA1wOgcJC5YHamL9XVm8dPjeQaMJoJJp";
 export const reactUrl = process.env.REACT_URL;
 
 const redirect_uri = reactUrl + "/set_token/";
@@ -269,11 +269,11 @@ export class HandleTokenLoc extends AuthComponent<AuthPropsLoc, AuthState>
                 setObj("user", response.results[0]);
                 if (location) 
 
-                    this.props.history.push(location);
+                    this.props.history.push("/page1");
                 
                 else 
                 
-                    this.props.history.push("/");
+                    this.props.history.push("/page1");
                 
             }).catch(() =>
             {
