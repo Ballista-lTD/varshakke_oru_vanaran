@@ -13,7 +13,7 @@ export  class Balloon extends React.Component
         return (
             <div>
                 <h2 className='heading'>
-                    Varshakkoru Vanaran
+                    Minglikkoo
                 </h2>
                 <img className="bg1-img" src={bg2} alt="love"/>
                 <div className="bg-image-container">

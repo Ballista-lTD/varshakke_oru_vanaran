@@ -5,6 +5,7 @@ import LoveIcon from "../../images/qstnIcon.svg";
 
 import Typography from "@mui/material/Typography";
 import Fire from "../../images/minglec.svg";
+import React from "react";
 
 import {styled} from "@mui/material/styles";
 import Rating from "@mui/material/Rating";
@@ -18,15 +19,18 @@ import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
 import {toast, ToastContainer} from "react-toastify";
 import {Token} from "../../api/model";
 
-const questions = [
-    {qstn: "You Smart? \n(0: Brain Potato, 5: Omniscient", key: "intelligence"},
-    {qstn: "Show me your biceps. \n(0: pappadavaanam, 5: Hercules)", key: "strength"},
-    {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)", key: "beauty"},
-    {qstn: "Your Charisma. \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)", key: "charisma"},
-    {qstn: "How much money you burn. \n(0: Starving to Death) \n(5:I pave golden roads)", key: "wealth"},
-    {qstn: "Generosity, yes rate it. \n(0: I burn orphanages, 5:Karl Marx)", key: "will_help_poor"},
-    {qstn: "You die for God? I am become Death. \n(0:-J Robert Oppenheimer, 5: -Krishna)", key: "religiousity"},
-    {qstn: "Your connection with Liberalism🧐 \n(0:Girls? No School!!) \n(5:Martin Luther King)", key: "liberal"}];
+interface questionsPropss {
+    qstn: string;
+}
+
+const questions: questionsPropss[] = [{qstn: "Rate your Brains.🧠 \n(0: Brain Potato, 5: Omniscient"},
+    {qstn: "Show me your biceps.💪 \n(0: Pappadam, 5: Hercules)"},
+    {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)"},
+    {qstn: "How Charismatic you are? \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)"},
+    {qstn: "How much money you burn?🤑\t \n(0: Starving to Death) \n(5:I pave golden roads)"},
+    {qstn: "Generosity, yes rate it.😇\t \n(0: I burn orphanages, 5:Karl Marx)"},
+    {qstn: "You die for God? \n(0: I am become Death. -J Robert Oppenheimer) \n(5: I am become Death. -Krishna)"},
+    {qstn: "Your connection with Liberalism🧐 \n(0:Girls? No School!!) \n(5:Martin Luther King)"}, ];
 
 const StyledRating = styled(Rating)({
     "& .MuiRating-iconFilled": {
