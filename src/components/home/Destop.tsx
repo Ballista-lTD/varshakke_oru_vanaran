@@ -18,10 +18,11 @@ export class Desktop extends React.Component
                             ITHINE KURICH ORU VAKK
                         </h2>
                         <h4 className="text-white ">
-                            ith oru mikacha oru ithanu. ithine kurich parayukayanengil namukk orupad parayan ind but
-                            nammak
-                            ponde so poyi
-                            form fill akku and get mingled.
+                            Heyyyy beautiful people out there!, wanna try something different???
+                            Are you ready to celebrate this valentine&apos;s day with an algorithmically chosen valentine❤️
+                            All that you need to do is login to the site &ldquo;Minglikko.com&rdquo;😂, test yourself (be honest),
+                            and get a blast with your valentine🥳 <br/>
+                            <span>Fill the form and get mingled.</span>
                         </h4>
                     </div>
                     <div className='right-box d-inline '>

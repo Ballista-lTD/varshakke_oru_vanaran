@@ -1,6 +1,6 @@
 import "./bootstrap.min.css";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
-import {HandleToken} from "./api/auth";
+import {AuthComponent, AuthState, HandleToken} from "./api/auth";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
@@ -15,8 +15,9 @@ import Chat from "./components/Chat";
 import Swiper from "./components/Chat/Swiper";
 import {Page1} from "./components/home/page1";
 import {Mingle} from "./components/home/mingle";
-import {Index} from "./components/Index";
 import React from "react";
+import {Homepage} from "./components/home/Home";
+import {Desktop} from "./components/home/Destop";
 
 
 const theme = createTheme({
@@ -39,7 +40,7 @@ interface AppRouterProps
 type AppProps = RouteComponentProps<AppRouterProps>
 
 
-class AppLoc extends React.Component<AppProps>
+class AppLoc extends AuthComponent<AppProps, AuthState>
 {
     /**
      * Initialize props
@@ -51,30 +52,6 @@ class AppLoc extends React.Component<AppProps>
         super(props);
 
     }
-
-    /**
-     * componentDidMount() method allows us to execute the React code even after component is rendered
-     */
-    // componentDidMount()
-    // {
-    //     getParam("lat", "", true);
-    //     getParam("lng", "", true);
-    //     getParam("loc", "Search Location", true);
-    //     getParam("query", "Search Hospital", true);
-    // }
-
-    /**
-     * componentDidUpdate() method use to execute the code when the state of component changes
-     */
-    // componentDidUpdate()
-    // {
-    //     getParam("lat", "", true);
-    //     getParam("lng", "", true);
-    //     getParam("loc", "Search Location", true);
-    //     getParam("query", "Search Hospital", true);
-    // }
-
-
 
     render()
     {
@@ -96,14 +73,10 @@ class AppLoc extends React.Component<AppProps>
                             <Page1/>
                         </Route>
                         <Route path="/">
-                            {/*{(this.width < 768) ?*/}
-                            {/*    <Homepage/>*/}
-                            {/*    : <Desktop/>*/}
-                            {/*}*/}
-
-                            <Index/>
-                            {/*<Desktop/>*/}
-
+                            {(this.state.width < 768) ?
+                                <Homepage/>
+                                : <Desktop/>
+                            }
                         </Route>
                     </Switch>
                 </ThemeProvider>

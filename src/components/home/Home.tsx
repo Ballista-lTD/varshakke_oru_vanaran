@@ -13,8 +13,7 @@ export  class Balloon extends React.Component
         return (
             <div>
                 <h2 className='heading'>
-                    Minglikko
-                </h2>
+                    Minglikko                </h2>
                 <img className="bg1-img" src={bg2} alt="love"/>
                 <div className="bg-image-container">
 
@@ -41,8 +40,11 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
                         ITHINE KURICH ORU VAKK
                     </h2>
                     <p className="description">
-                        Place to find your valentines <br/>
-                        <span>form fill akku and get mingled.</span>
+                        Heyyyy beautiful people out there!, wanna try something different???
+                        Are you ready to celebrate this valentine&apos;s day with an algorithmically chosen valentine❤️
+                        All that you need to do is login to the site &ldquo;Minglikko.com&rdquo;😂, test yourself (be honest),
+                        and get a blast with your valentine🥳 <br/>
+                        <span>Fill the form and get mingled.</span>
                     </p>
                     <Slider text="Get Started" color="#fff" text_unlocked="Go on"
                         onSuccess={() => this.state.user? this.performAuth() : this.props.history.push("/page1")}/>

@@ -90,6 +90,11 @@
 
 }
 
+.right-fixed{
+    position:fixed;
+    right: 10%;
+    top: 10%;
+}
 .left-box  {
     background: #f7924a;
     border-width: 0;

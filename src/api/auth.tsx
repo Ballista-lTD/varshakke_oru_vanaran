@@ -9,7 +9,7 @@ import {toast} from "react-toastify";
 import localForage from "localforage";
 
 
-const client_id = "puA76WSCrA1wOgcJC5YHamL9XVm8dPjeQaMJoJJp";
+const client_id = "FIS8fYLp9BgpEFdVgUdDwtUiGXsje37bak8hGMfV";
 export const reactUrl = process.env.REACT_URL;
 
 const redirect_uri = reactUrl + "/set_token/";

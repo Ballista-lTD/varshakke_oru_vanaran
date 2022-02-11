@@ -5,32 +5,30 @@ import LoveIcon from "../../images/qstnIcon.svg";
 
 import Typography from "@mui/material/Typography";
 import Fire from "../../images/minglec.svg";
-import React from "react";
 
 import {styled} from "@mui/material/styles";
 import Rating from "@mui/material/Rating";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-import {List, ListItem, ListItemAvatar} from "@mui/material";
-
+import {Fab, List, ListItem, ListItemAvatar} from "@mui/material";
 
 import Slider from "../utils/slider/slider";
 import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
 import {toast, ToastContainer} from "react-toastify";
 import {Token} from "../../api/model";
+import {withRouter} from "react-router";
 
-interface questionsPropss {
-    qstn: string;
-}
+const questions = [
+    {qstn: "Rate your Brains.🧠 \n(0: Brain Potato, 5: Omniscient", key: "intelligence"},
+    {qstn: "Show me your biceps.💪 \n(0: Pappadam, 5: Hercules)", key: "strength"},
+    {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)", key: "beauty"},
+    {qstn: "How Charismatic you are? \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)", key: "charisma"},
+    {qstn: "How much money you burn?🤑\t \n(0: Starving to Death) \n(5:I pave golden roads)", key: "wealth"},
+    {qstn: "Generosity, yes rate it.😇\t \n(0: I burn orphanages, 5:Karl Marx)", key: "will_help_poor"},
+    {qstn: "You die for God? \n(0: I am become Death. -J Robert Oppenheimer) \n(5: I am become Death. -Krishna)", key: "religiousity"},
+    {qstn: "Your connection with Liberalism🧐 \n(0:Girls? No School!!) \n(5:Martin Luther King)", key: "liberal"}
+];
 
-const questions: questionsPropss[] = [{qstn: "Rate your Brains.🧠 \n(0: Brain Potato, 5: Omniscient"},
-    {qstn: "Show me your biceps.💪 \n(0: Pappadam, 5: Hercules)"},
-    {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)"},
-    {qstn: "How Charismatic you are? \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)"},
-    {qstn: "How much money you burn?🤑\t \n(0: Starving to Death) \n(5:I pave golden roads)"},
-    {qstn: "Generosity, yes rate it.😇\t \n(0: I burn orphanages, 5:Karl Marx)"},
-    {qstn: "You die for God? \n(0: I am become Death. -J Robert Oppenheimer) \n(5: I am become Death. -Krishna)"},
-    {qstn: "Your connection with Liberalism🧐 \n(0:Girls? No School!!) \n(5:Martin Luther King)"}, ];
 
 const StyledRating = styled(Rating)({
     "& .MuiRating-iconFilled": {
@@ -47,10 +45,12 @@ type MingleState = AuthState & {
     response: {
         [key in optionsType]?: number;
     },
-    done: boolean
+    done: boolean,
+    sub_total:number
+
 };
 
-export class Mingle extends AuthComponent<AuthPropsLoc, MingleState> 
+class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
 {
     constructor(props: AuthPropsLoc) 
     {
@@ -88,7 +88,7 @@ export class Mingle extends AuthComponent<AuthPropsLoc, MingleState>
         this.refresh(() => 
         {
             if (this.state.user?.tokens?.total && this.state.user.tokens.total > 0)
-                this.setState({done: true});
+                this.setState({done: true, sub_total : 20-this.state.user?.tokens?.total });
 
         });
     }
@@ -102,7 +102,7 @@ export class Mingle extends AuthComponent<AuthPropsLoc, MingleState>
 
         if (points <= 20) 
         {
-            this.setState({response: {...this.state.response, [key as optionsType]: value}});
+            this.setState({response: {...this.state.response, [key as optionsType]: value}, sub_total:20-points});
             if (points === 20)
                 toast("20 hearts set, eni submit adicho");
 
@@ -168,7 +168,7 @@ export class Mingle extends AuthComponent<AuthPropsLoc, MingleState>
                     <img className="w-100 align-bottom py-0 position-absolute" src={Fire} alt="button"/>
 
                     <Typography fontFamily="Poppins" className="align-self-end pt-1 w-100 text-wrap"
-                        fontSize="21px" color="#949494">
+                        fontSize="21px">
                         <List className={"d-flex flex-column text-left ps-3"}>
                             {questions.map(({qstn, key}) =>
                                 (
@@ -181,7 +181,6 @@ export class Mingle extends AuthComponent<AuthPropsLoc, MingleState>
                                             <span style={{fontSize: "16px", whiteSpace: "pre"}}>{qstn}</span>
                                         </div>
                                         <div className={"ps-5  w-75"}>
-
                                             <StyledRating
                                                 name="customized-color"
                                                 className="d-flex w-100 align-self-center "
@@ -199,8 +198,17 @@ export class Mingle extends AuthComponent<AuthPropsLoc, MingleState>
                     <div className="w-75">
                         <Slider unlocked={this.state.done}
                             onSuccess={this.handleSubmit} text="Send" color="#fff" text_unlocked="Happy Dating"/>
+
                     </div>
                 </div>
+                <div  className='right-fixed' >
+                    <Fab aria-label="add">
+                        {this.state.sub_total}<FavoriteIcon color="primary"/>
+                    </Fab>
+                </div>
+
             </div>);
     }
 }
+
+export const Mingle = withRouter(MingleLoc);

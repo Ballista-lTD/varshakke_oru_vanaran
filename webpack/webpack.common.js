@@ -92,7 +92,8 @@ module.exports = (env) => ({
         new CopyPlugin({
             patterns: [
                 {from: path.resolve(__dirname, "..", "public/robots.txt")},
-                {from: path.resolve(__dirname, "..", "public/libsignal-protocol.js")}
+                {from: path.resolve(__dirname, "..", "public/libsignal-protocol.js")},
+                {from: path.resolve(__dirname, "..", "public/cover.png")}
             ]
         }),
         new Dotenv({path: path.resolve(__dirname, "..", `./.${env}.env`)})
