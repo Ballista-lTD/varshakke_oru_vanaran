@@ -1,5 +1,4 @@
 import "./bootstrap.min.css";
-// import {Index} from "./components/Index";
 import {Route, RouteComponentProps, Switch, withRouter} from "react-router";
 import {HandleToken} from "./api/auth";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -17,6 +16,7 @@ import Swiper from "./components/Chat/Swiper";
 import {Page1} from "./components/home/page1";
 import {Mingle} from "./components/home/mingle";
 import {Index} from "./components/Index";
+import React from "react";
 
 
 const theme = createTheme({
