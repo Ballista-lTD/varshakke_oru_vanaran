@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import {Balloon} from "./Home";
+import {Page1} from "./page1";
 import banner from "./bannersvg.svg";
 
 export class Desktop extends React.Component 
@@ -25,6 +26,11 @@ export class Desktop extends React.Component
                     </div>
                     <div className='right-box d-inline '>
                         <img src={banner} alt={"banner"} className={"banner-image"} />
+                    </div>
+                    <div >
+
+                        <Page1 showBanner={false}/>
+
                     </div>
                 </div>
 
