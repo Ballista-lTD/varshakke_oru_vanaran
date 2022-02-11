@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
 import {Balloon} from "./Home";
-import banner from "./banner.png";
+import banner from "./bannersvg.svg";
 
-export class Desktop extends React.Component {
-    render() {
+export class Desktop extends React.Component 
+{
+    render() 
+    {
         return (
             <>
                 <div className="p-0 d-flex">
