@@ -125,6 +125,6 @@
     position: absolute;
     -webkit-transform: translate(-65px,2px);
     transform: translate(-90px,2px);
-    width: 65vw;
+    width: 60vw;
     z-index: 10;
 }
