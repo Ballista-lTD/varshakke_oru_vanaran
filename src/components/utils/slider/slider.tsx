@@ -12,13 +12,13 @@ interface SliderProps {
     color: string;
     text_unlocked: string;
     text: string;
-
+    unlocked?: boolean;
 }
 
 interface SliderState extends ResponsiveState {
     isDragging: boolean;
     unlocked: boolean;
-
+    uncontrolled: boolean;
 }
 
 export default class Slider extends ResponsiveComponent<SliderProps, SliderState> 
@@ -37,6 +37,7 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
 
         super(props);
         this.startX = 0;
+        this.state.uncontrolled = typeof props.unlocked === "undefined";
     }
 
 
@@ -61,7 +62,7 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
 
     onDrag = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => 
     {
-        if (this.unmounted || this.state.unlocked) return;
+        if (this.unmounted || (this.props.unlocked || this.state.unlocked)) return;
         if (this.isDragging) 
         {
             if (isTouchDevice)
@@ -84,13 +85,13 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
 
     updateSliderStyle = () => 
     {
-        if (this.unmounted || this.state.unlocked) return;
+        if (this.unmounted || (this.props.unlocked || this.state.unlocked)) return;
         slider.current.style.left = (this.sliderLeft) + "px";
     };
 
     stopDrag = () => 
     {
-        if (this.unmounted || this.state.unlocked) return;
+        if (this.unmounted || (this.props.unlocked || this.state.unlocked)) return;
         if (this.isDragging) 
         {
             this.isDragging = false;
@@ -122,7 +123,7 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
 
     startDrag = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => 
     {
-        if (this.unmounted || this.state.unlocked) return;
+        if (this.unmounted || (this.props.unlocked || this.state.unlocked)) return;
         this.isDragging = true;
         if (!this.state.isDragging)
 
@@ -138,24 +139,21 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
     onSuccess = () => 
     {
         container.current.style.width = container.current.clientWidth + "px";
-        this.setState({
-            unlocked: true
-        });
+        if(this.state.uncontrolled)
+            this.setState({unlocked: true});
     };
 
     getText = () => 
     {
-        return this.state.unlocked ? (this.props.text_unlocked || "UNLOCKED") : (this.props.text || "SLIDE");
+        return (this.props.unlocked || this.state.unlocked) ? (this.props.text_unlocked || "UNLOCKED") : (this.props.text || "SLIDE");
     };
 
     reset = () => 
     {
         if (this.unmounted) return;
-        this.setState({unlocked: false}, () => 
-        {
-            this.sliderLeft = 0;
-            this.updateSliderStyle();
-        });
+
+        this.sliderLeft = 0;
+        this.updateSliderStyle();
     };
 
     componentWillUnmount() 
@@ -166,8 +164,8 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
     render() 
     {
         return (
-            <div className={`ReactSwipeButton ${this.state.unlocked ? "rsbContainerUnlocked " : ""}`}>
-                <div className={`rsbContainer ${this.state.unlocked ? "rsbContainerUnlocked " : ""}`}
+            <div className={`ReactSwipeButton ${(this.props.unlocked || this.state.unlocked) ? "rsbContainerUnlocked " : ""}`}>
+                <div className={`rsbContainer ${(this.props.unlocked || this.state.unlocked) ? "rsbContainerUnlocked " : ""}`}
                     ref={container}>
                     <div role="none" className={`rsbcSlider ${this.state.isDragging ? "unRoundRight" : ""}`}
                         ref={slider}
@@ -175,7 +173,7 @@ export default class Slider extends ResponsiveComponent<SliderProps, SliderState
                         style={{background: this.props.color}}
                         onTouchStart={this.startDrag}>
                         <span className="rsbcSliderText">{this.getText()}</span>
-                        {!this.state.unlocked &&
+                        {!(this.props.unlocked || this.state.unlocked) &&
                             <span className={"rsbcSliderArrow"}/>
                         }
                         <span className={`rsbcSliderCircle ${this.state.isDragging ? "unRoundLeft" : ""}`}
