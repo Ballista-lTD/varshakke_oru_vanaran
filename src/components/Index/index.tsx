@@ -49,7 +49,7 @@ class IndexLoc extends AuthComponent<AuthPropsLoc, IndexState>
     render()
     {
 
-        if (this.state.width > 300)
+        if (this.state.width > 600)
         
             return (
                 <Desktop/>

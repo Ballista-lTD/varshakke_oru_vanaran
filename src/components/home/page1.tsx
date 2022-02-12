@@ -28,7 +28,6 @@ class Page1Loc extends AuthComponent<Page1Props, AuthState>
     {
 
         if (!this.state.user)
-
             this.performAuth();
 
         return (
@@ -73,10 +72,17 @@ class Page1Loc extends AuthComponent<Page1Props, AuthState>
                             <Slider text="Oo Sammathiche" text_unlocked="poda pulle" color="#fff"
                                 onSuccess={() =>
                                 {
-                                    setTimeout(() =>
-                                    {
-                                        this.props.history.push("/mingle");
-                                    }, 500);
+
+                                    if (!this.state.user)
+                                        this.performAuth();
+                                    else
+                                    
+
+                                        setTimeout(() =>
+                                        {
+                                            this.props.history.push("/mingle");
+                                        }, 500);
+                                    
                                 }}
                             />
                         </div>
