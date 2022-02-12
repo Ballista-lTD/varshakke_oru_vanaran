@@ -34,6 +34,7 @@ class Page1Loc extends AuthComponent<Page1Props, AuthState>
         if (!this.state.user)
             this.performAuth();
 
+
         return (
             <div className=" overflow-hidden vh-100 " color="black">
                 <div className={`d-flex flex-row justify-content-between ${!this.props.showBanner ? "pt-5 mt-5 justify-content-center" : ""}`}>
@@ -77,7 +78,7 @@ class Page1Loc extends AuthComponent<Page1Props, AuthState>
                     <div className={"w-100 position-relative d-flex flex-column align-items-center overflow-visible"}>
                         <img className="vw-100 align-bottom position-absolute py-0 " src={Fire} alt="fire"/>
                         <div className={"w-75 pt-5 mt-3"}>
-                            <Slider text="Oo Sammathiche" text_unlocked="poda pulle" color="#fff"
+                            <Slider text="Oo Sammathiche" text_unlocked="okey " color="#fff"
                                 onSuccess={() => setTimeout(() => this.props.history.push("/mingle"), 500)}
                             />
                         </div>
