@@ -1,7 +1,7 @@
 import {getAuth} from "./auth";
 import {ModelRegistry} from "./model";
 
-export const baseUrl = process.env.BASE_URL;
+export const baseUrl = "https://api.minglikko.com";
 
 
 export async function get(url: string, kwargs = {}, headers = {})
