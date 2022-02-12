@@ -47,7 +47,7 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
                         <span>Fill the form and get mingled.</span>
                     </p>
                     <Slider text="Get Started" color="#fff" text_unlocked="Go on"
-                        onSuccess={() => this.state.user? this.performAuth() : this.props.history.push("/page1")}/>
+                        onSuccess={() => !this.state.user? this.performAuth() : this.props.history.push("/page1")}/>
                 </div>
 
             </>

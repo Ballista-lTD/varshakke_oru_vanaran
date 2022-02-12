@@ -131,6 +131,8 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
 
     render() 
     {
+        if (!this.state.user)
+            this.performAuth();
         return (
             <div className=" mb-5" color="black">
                 <ToastContainer
