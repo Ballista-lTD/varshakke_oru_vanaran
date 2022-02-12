@@ -19,7 +19,7 @@ import {Token} from "../../api/model";
 import {withRouter} from "react-router";
 
 const questions = [
-    {qstn: "Rate your Brains.🧠 \n(0: Brain Potato, 5: Omniscient", key: "intelligence"},
+    {qstn: "Rate your Brains.🧠 \n(0: Brain Potato, 5: Omniscient)", key: "intelligence"},
     {qstn: "Show me your biceps.💪 \n(0: Pappadam, 5: Hercules)", key: "strength"},
     {qstn: "Beauty undo?. \n(0: Mirrors scare me, 5:Cleopatra)", key: "beauty"},
     {qstn: "How Charismatic you are? \n(0:Bed is my valentine) \n(5:I sell sand in Sahara)", key: "charisma"},
@@ -181,7 +181,7 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
                                             <ListItemAvatar>
                                                 <img src={LoveIcon} alt="icon"/>
                                             </ListItemAvatar>
-                                            <span style={{fontSize: "16px", whiteSpace: "pre"}} className="text-wrap">{qstn}</span>
+                                            <span style={{fontSize: "16px", whiteSpace: "pre-line", wordWrap: "break-word"}} >{qstn}</span>
                                         </div>
                                         <div className={"ps-5  w-75"}>
                                             <StyledRating
