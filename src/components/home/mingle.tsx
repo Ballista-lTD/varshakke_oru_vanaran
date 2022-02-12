@@ -91,6 +91,9 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
 
     validate = (key?: string, value?: number) => 
     {
+        if(this.state.done)
+            return false;
+
         const val = -(this.state.response[key as optionsType] || 0) + (value || 0);
 
         const points = Object.keys(this.state.response)
@@ -168,18 +171,17 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
                 <div className="py-0 pt-3 d-flex justify-content-center flex-column align-items-center">
                     <img className="w-100 align-bottom py-0 position-absolute" src={Fire} alt="button"/>
 
-                    <Typography fontFamily="Poppins" className="align-self-end pt-1 w-100 text-wrap"
+                    <Typography fontFamily="Poppins" className="pt-1 w-100 text-wrap"
                         fontSize="21px">
                         <List className={"d-flex flex-column text-left ps-3"}>
                             {this.state.response && questions.map(({qstn, key}) =>
                                 (
-
                                     <ListItem key={key} className={"d-flex align-items-start flex-column"}>
                                         <div className="d-flex flex-row">
                                             <ListItemAvatar>
                                                 <img src={LoveIcon} alt="icon"/>
                                             </ListItemAvatar>
-                                            <span style={{fontSize: "16px", whiteSpace: "pre"}}>{qstn}</span>
+                                            <span style={{fontSize: "16px", whiteSpace: "pre"}} className="text-wrap">{qstn}</span>
                                         </div>
                                         <div className={"ps-5  w-75"}>
                                             <StyledRating
@@ -194,7 +196,8 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
                                         </div>
                                     </ListItem>
                                 ))}
-                        </List></Typography>
+                        </List>
+                    </Typography>
 
                     <div className="w-75">
                         <Slider unlocked={this.state.done}
@@ -202,11 +205,13 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
 
                     </div>
                 </div>
+                {!this.state.done &&
                 <div  className='right-fixed' >
                     <Fab aria-label="add">
                         {this.state.sub_total}<FavoriteIcon color="primary"/>
                     </Fab>
                 </div>
+                }
 
             </div>);
     }

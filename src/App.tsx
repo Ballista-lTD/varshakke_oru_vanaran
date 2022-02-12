@@ -66,9 +66,7 @@ class AppLoc extends AuthComponent<AppProps, AuthState>
                         <Route path="/set_token/">
                             <HandleToken/>
                         </Route>
-                        <Route path="/mingle/">
-                            <Mingle/>
-                        </Route>
+                        <Route path="/mingle/" component={Mingle} />
                         <Route path="/page1/">
                             <Page1 showBanner={true}/>
                         </Route>
