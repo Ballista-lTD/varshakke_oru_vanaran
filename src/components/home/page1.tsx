@@ -18,7 +18,8 @@ interface ruless {
 const rules: ruless[] = [
     {rule: "Never lie to your doctor and a̶t̶t̶o̶r̶n̶e̶y̶, Valentine!", icon: Luv},
     {rule: "Adhikam thallanda max 20 pointse kayyilollu", icon: Luv1},
-    {rule: "Come back after 14 th midnight for a round of match making", icon: Luv2}
+    {rule: "Come back after 13 th midnight for a round of match making", icon: Luv2},
+    {rule: "14 ne sambavam set avum mone....", icon: Luv1}
 ];
 
 
