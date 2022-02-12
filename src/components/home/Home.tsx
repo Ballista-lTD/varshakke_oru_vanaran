@@ -6,14 +6,14 @@ import Slider from "../utils/slider/slider";
 import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
 import {withRouter} from "react-router";
 
-export  class Balloon extends React.Component
+export class Balloon extends React.Component 
 {
-    render()
+    render() 
     {
         return (
             <div>
                 <h2 className='heading'>
-                    Minglikko                </h2>
+                    Minglikko </h2>
                 <img className="bg1-img" src={bg2} alt="love"/>
                 <div className="bg-image-container">
 
@@ -25,9 +25,9 @@ export  class Balloon extends React.Component
 }
 
 
-export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
+export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState> 
 {
-    render()
+    render() 
     {
         return (
             <>
@@ -40,14 +40,13 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
                         ITHINE KURICH ORU VAKK
                     </h2>
                     <p className="description">
-                        Heyyyy beautiful people out there!, wanna try something different???
-                        Are you ready to celebrate this valentine&apos;s day with an algorithmically chosen valentine❤️
-                        All that you need to do is login to the site &ldquo;Minglikko.com&rdquo;😂, test yourself (be honest),
-                        and get a blast with your valentine🥳 <br/>
+                        You are now in a complete anonymous place where neither your sex nor your religion matters, all
+                        you need is brain😂 as your time is damn important for us now slide right, explore and get
+                        mingled😎✨ <br/>
                         <span>Fill the form and get mingled.</span>
                     </p>
                     <Slider text="Get Started" color="#fff" text_unlocked="Go on"
-                        onSuccess={() => !this.state.user? this.performAuth() : this.props.history.push("/page1")}/>
+                        onSuccess={() => !this.state.user ? this.performAuth() : this.props.history.push("/page1")}/>
                 </div>
 
             </>
@@ -55,4 +54,4 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
     }
 }
 
-export  const Homepage = withRouter(HomepageLoc);
+export const Homepage = withRouter(HomepageLoc);

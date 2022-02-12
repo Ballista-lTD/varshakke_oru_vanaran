@@ -56,12 +56,7 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
     {
         super(props);
 
-        this.refreshAuth();
-        // refresh_user();
-
         const t = this.state.user?.tokens;
-
-        console.log(t);
 
         if (t) 
         {
@@ -82,14 +77,15 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
     {
         super.componentDidMount();
 
-        if (!this.state.user)
-            this.performAuth();
+        if (!this.state.user?.tokens)
+            return this.performAuth();
+
+        this.refreshAuth();
 
         this.refresh(() => 
         {
-            if (this.state.user?.tokens?.total && this.state.user.tokens.total > 0)
+            if (this.state.user?.tokens?.total && this.state?.user.tokens.total > 0)
                 this.setState({done: true, sub_total : 20-this.state.user?.tokens?.total });
-
         });
     }
 
@@ -175,7 +171,7 @@ class MingleLoc extends AuthComponent<AuthPropsLoc, MingleState>
                     <Typography fontFamily="Poppins" className="align-self-end pt-1 w-100 text-wrap"
                         fontSize="21px">
                         <List className={"d-flex flex-column text-left ps-3"}>
-                            {questions.map(({qstn, key}) =>
+                            {this.state.response && questions.map(({qstn, key}) =>
                                 (
 
                                     <ListItem key={key} className={"d-flex align-items-start flex-column"}>

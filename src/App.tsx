@@ -70,7 +70,7 @@ class AppLoc extends AuthComponent<AppProps, AuthState>
                             <Mingle/>
                         </Route>
                         <Route path="/page1/">
-                            <Page1/>
+                            <Page1 showBanner={true}/>
                         </Route>
                         <Route path="/">
                             {(this.state.width < 768) ?
