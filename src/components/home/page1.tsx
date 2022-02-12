@@ -45,7 +45,7 @@ class Page1Loc extends AuthComponent<Page1Props, AuthState>
                                 TO GET MINGLED</Typography>
                         </div>}
                 </div>
-                <div className="d-flex justify-content-center flex-column align-items-center">
+                <div className="pt-3 d-flex justify-content-center flex-column align-items-center">
                     {!this.props.showBanner &&
                         <div>
                             <div>
