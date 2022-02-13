@@ -36,20 +36,22 @@ interface RankState extends AuthState {
 
 class RankLoc extends AuthComponent<AuthPropsLoc, RankState> 
 {
+    initialFilters: Record<string, number[]>;
+
     constructor(props: AuthPropsLoc) 
     {
         super(props);
-        const filters: Record<string, number[]> = {".": [0, 5]};
+        this.initialFilters = {".": [0, 5]};
 
         for(const {key} of filterButtons)
-            filters[key] = [0, 5];
+            this.initialFilters[key] = [0, 5];
 
         this.state = {
             ...this.state,
             selectedTokens: [],
             slider: false,
             filterKey: ".",
-            filters,
+            filters: this.initialFilters,
             ready: false
         };
     }
@@ -128,6 +130,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
     filterEntries = (min: number, max: number) =>
     {
+        console.log(min, max);
         this.setState({filters: {...this.state.filters, [this.state.filterKey]: [min, max]}});
 
         let filtered = this.state.unFilteredPartners;
@@ -135,7 +138,8 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
         Object.keys(this.state.filters).forEach((key) => 
         {
             const [lower, upper] = this.state.filters[key];
-            filtered = filtered.filter((obj) => obj.getValue(key) >= lower && obj.getValue(key) <= upper);
+            if(key !== ".")
+                filtered = filtered.filter((obj) => obj.getValue(key) >= lower && obj.getValue(key) <= upper);
         });
 
         this.setState({partnerList: filtered});
