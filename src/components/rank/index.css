@@ -4,3 +4,21 @@
     background-color: black;
     margin: 6px 0;
 }
+
+.rank_item {
+    background: #FFEFE4;
+    border: 0.5px solid #E27940;
+    border-radius: 7px;
+    width: fit-content !important;
+}
+
+.rank_width {
+    width: fit-content !important;
+}
+
+.rank_text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    color: #949494;
+}

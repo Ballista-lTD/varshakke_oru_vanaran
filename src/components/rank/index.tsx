@@ -6,8 +6,8 @@ import {toast} from "react-toastify";
 import {withRouter} from "react-router";
 import Loader from "react-loader-spinner";
 import {Container} from "@mui/material";
-import {DragDropContext, Droppable, Draggable, DropResult} from "react-beautiful-dnd";
-import {getItemStyle, getListStyle, move, reorder} from "./utils";
+import {DragDropContext, DropResult} from "react-beautiful-dnd";
+import {move, reorder} from "./utils";
 import {Dropper} from "./Dropper";
 
 
