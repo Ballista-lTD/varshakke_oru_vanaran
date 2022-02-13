@@ -14,14 +14,14 @@ import Slider from "@mui/material/Slider";
 
 
 const filterButtons = [
-    {icon: "💀", key: "intelligence"},
-    {icon: "💀", key: "strength"},
-    {icon: "💀", key: "beauty"},
+    {icon: "🧠", key: "intelligence"},
+    {icon: "💪", key: "strength"},
+    {icon: "✨", key: "beauty"},
     {icon: "💀", key: "charisma"},
     {icon: "💀", key: "wealth"},
     {icon: "💀", key: "will_help_poor"},
     {icon: "💀", key: "religiousity"},
-    {icon: "💀", key: "liberal"}
+    {icon: "🗽", key: "liberal"}
 ];
 
 interface RankState extends AuthState {
@@ -158,7 +158,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
         return (
             <>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <button onClick={this.handleSubmit} style={{color: "#949494"}}>Select your priority</button>
                 <Container className="rank_filter_container w-100">
                     {filterButtons.map(({icon, key}, index) => (
                         <IconButton key={index}
