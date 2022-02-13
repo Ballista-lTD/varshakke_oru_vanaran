@@ -1,3 +1,6 @@
+import {DraggableLocation, DraggingStyle, NotDraggingStyle} from "react-beautiful-dnd";
+import {CSSProperties} from "react";
+
 const grid = 8;
 
 export const getItemStyle = (isDragging: boolean, draggableStyle: DraggingStyle | NotDraggingStyle | undefined): CSSProperties => ({
@@ -13,7 +16,7 @@ export const getItemStyle = (isDragging: boolean, draggableStyle: DraggingStyle 
     ...draggableStyle
 });
 
-export const getListStyle = isDraggingOver => ({
+export const getListStyle = (isDraggingOver: boolean) => ({
     background: isDraggingOver ? "#FAA677" : "none",
     padding: grid,
     width: 250

@@ -124,6 +124,11 @@ export class ModelObject
 
     }
 
+    getValue(key: string)
+    {
+        return this.data[key];
+    }
+
     getData()
     {
         for (const item of this.fields)

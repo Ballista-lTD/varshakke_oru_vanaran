@@ -9,27 +9,52 @@ import {Container} from "@mui/material";
 import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {move, reorder} from "./utils";
 import {Dropper} from "./Dropper";
+import IconButton from "@mui/material/IconButton";
+import Slider from "@mui/material/Slider";
 
+
+const filterButtons = [
+    {icon: "💀", key: "intelligence"},
+    {icon: "💀", key: "strength"},
+    {icon: "💀", key: "beauty"},
+    {icon: "💀", key: "charisma"},
+    {icon: "💀", key: "wealth"},
+    {icon: "💀", key: "will_help_poor"},
+    {icon: "💀", key: "religiousity"},
+    {icon: "💀", key: "liberal"}
+];
 
 interface RankState extends AuthState {
+    unFilteredPartners: PartnerTokenObject[]
     partnerList: PartnerTokenObject[]
     selectedTokens: PartnerTokenObject[]
+    filters: Record<string, number[]>
+    filterKey: string
+    slider: boolean
     ready: boolean
 }
 
-class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
+class RankLoc extends AuthComponent<AuthPropsLoc, RankState> 
 {
     constructor(props: AuthPropsLoc) 
     {
         super(props);
+        const filters: Record<string, number[]> = {".": [0, 5]};
+
+        for(const {key} of filterButtons)
+            filters[key] = [0, 5];
+
         this.state = {
             ...this.state,
             selectedTokens: [],
+            slider: false,
+            filterKey: ".",
+            filters,
             ready: false
         };
     }
 
-    async componentDidMount()
+    async componentDidMount() 
     {
         super.componentDidMount();
 
@@ -38,12 +63,12 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
         const {results} = await PartnerToken.filter({}, true);
 
-        this.setState({partnerList: results, ready: true});
+        this.setState({partnerList: results, unFilteredPartners: results, ready: true});
     }
 
-    handleSubmit = async () =>
+    handleSubmit = async () => 
     {
-        try
+        try 
         {
             const priority = [
                 ...this.state.selectedTokens.map(({name}) => name),
@@ -52,15 +77,15 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
             await PartnerToken.modify({priority});
             toast.success("Ok set 14 midnight ne vanne chat cheyth polikke");
         }
-        catch (e)
+        catch (e) 
         {
             toast.error("Sathyathil prashnam enikk ano atho ninekko ?");
         }
     };
 
-    onDragEnd = (result: DropResult) =>
+    onDragEnd = (result: DropResult) => 
     {
-        const { source, destination } = result;
+        const {source, destination} = result;
 
         // dropped outside the list
         if (!destination)
@@ -101,6 +126,21 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
         }
     };
 
+    filterEntries = (min: number, max: number) =>
+    {
+        this.setState({filters: {...this.state.filters, [this.state.filterKey]: [min, max]}});
+
+        let filtered = this.state.unFilteredPartners;
+
+        Object.keys(this.state.filters).forEach((key) => 
+        {
+            const [lower, upper] = this.state.filters[key];
+            filtered = filtered.filter((obj) => obj.getValue(key) >= lower && obj.getValue(key) <= upper);
+        });
+
+        this.setState({partnerList: filtered});
+    };
+
     render() 
     {
         if (!this.state.user) 
@@ -109,7 +149,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
             return <></>;
         }
 
-        if(!this.state.ready)
+        if (!this.state.ready)
             return (
                 <Container className="mt-5 pt-5">
                     <Loader type="Bars" color="#3a77ff" height={50} width={50}/>
@@ -119,9 +159,31 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
         return (
             <>
                 <button onClick={this.handleSubmit}>Submit</button>
+                <Container className="rank_filter_container w-100">
+                    {filterButtons.map(({icon, key}, index) => (
+                        <IconButton key={index}
+                            onClick={() => this.setState({filterKey: key, slider: this.state.filterKey !== key})}>
+                            {icon}
+                        </IconButton>
+                    ))}
+                    <Slider
+                        hidden={!this.state.slider}
+                        getAriaLabel={() => "Filter Points"}
+                        value={this.state.filters[this.state.filterKey]}
+                        onChange={(e, value) => typeof value !== "number" &&
+                            this.filterEntries(value[0], value[1])}
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={5}
+                        step={1}
+                        disableSwap
+                    />
+
+                </Container>
+                <hr/><hr/>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Dropper list={this.state.selectedTokens} droppableId={"selectedTokens"}/>
-                    <hr />
+                    <hr/>
                     <Dropper list={this.state.partnerList} droppableId={"partnerList"}/>
                 </DragDropContext>
             </>
