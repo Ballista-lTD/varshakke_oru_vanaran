@@ -17,10 +17,10 @@ const filterButtons = [
     {icon: "🧠", key: "intelligence"},
     {icon: "💪", key: "strength"},
     {icon: "✨", key: "beauty"},
-    {icon: "💀", key: "charisma"},
-    {icon: "💀", key: "wealth"},
-    {icon: "💀", key: "will_help_poor"},
-    {icon: "💀", key: "religiousity"},
+    {icon: "🙏", key: "charisma"},
+    {icon: "🤑", key: "wealth"},
+    {icon: "🤝", key: "will_help_poor"},
+    {icon: "🙏", key: "religiousity"},
     {icon: "🗽", key: "liberal"}
 ];
 
@@ -162,12 +162,15 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
         return (
             <>
-                <button onClick={this.handleSubmit} style={{color: "#949494"}}>Select your priority</button>
-                <Container className="rank_filter_container w-100">
+                <div className="d-flex flex-row justify-content-between">
+                    <h6 className="p-1 m-2" style={{color: "#949494"}}>Select Your Priority</h6>
+                    <button className="p-1 m-2" onClick={this.handleSubmit} style={{borderRadius:"6px", backgroundColor:"#F0F0F0"}}>SUBMIT</button>
+                </div>
+                <Container className="rank_filter_container w-75">
                     {filterButtons.map(({icon, key}, index) => (
                         <IconButton key={index}
                             onClick={() => this.setState({filterKey: key, slider: this.state.filterKey !== key})}>
-                            {icon}
+                            {index !== 0 && "|"} {icon}
                         </IconButton>
                     ))}
                     <Slider
