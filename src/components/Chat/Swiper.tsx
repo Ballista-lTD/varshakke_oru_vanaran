@@ -124,7 +124,7 @@ class SwiperLoc extends AuthComponent<AuthPropsLoc, SwiperState>
                                         }}>
                                             Pinned Chats
                                         </div>
-                                        <Avatar src={this.state.user?.tokens?.profile || undefined} variant="rounded"
+                                        <Avatar variant="rounded"
                                             sx={{
                                                 height: "2.5rem",
                                                 borderRadius: "50%",

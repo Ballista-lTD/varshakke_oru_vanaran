@@ -1,7 +1,7 @@
 import {getAuth} from "./auth";
 import {ModelRegistry} from "./model";
 
-export const baseUrl = "https://api.minglikko.com";
+export const baseUrl = process.env.BASE_URL;
 
 
 export async function get(url: string, kwargs = {}, headers = {})
@@ -195,13 +195,11 @@ export default class Model
             let headers = {};
 
             if (auth)
-            
                 headers = {"Authorization": `Bearer ${getAuth()}`};
-            
 
-
-            const data = await get(`${this.baseurl}`, kwargs, headers);
-            const lst = data.results.map((item: ModelData) => new this.modelClass(item, this.baseurl));
+            const data = await get(this.baseurl, kwargs, headers);
+            const results = data.results || data;
+            const lst = results.map((item: ModelData) => new this.modelClass(item, this.baseurl));
             return {results: lst, next: data.next};
         }
         catch (e)
@@ -262,12 +260,12 @@ export default class Model
         }
     }
 
-    async modify(kwargs = {id: 0})
+    async modify(kwargs: Record<string, unknown> )
     {
         try
         {
             const headers = {"Authorization": `Bearer ${getAuth()}`};
-            const data = await patch(`${this.baseurl}${kwargs.id}/`, kwargs, headers);
+            const data = await patch(`${this.baseurl}${kwargs.id || ""}/`, kwargs, headers);
             return new this.modelClass(data, this.baseurl);
         }
         catch (e)

@@ -1,8 +1,8 @@
 import React from "react";
 import "./style.css";
 import {Balloon} from "./Home";
-import {Page1} from "./page1";
-import banner from "./bannersvg.svg";
+import {Page1} from "../page1";
+import banner from "../../images/bannersvg.svg";
 
 export class Desktop extends React.Component 
 {

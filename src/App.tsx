@@ -13,11 +13,8 @@ import {createTheme} from "@mui/material/styles";
 
 import Chat from "./components/Chat";
 import Swiper from "./components/Chat/Swiper";
-import {Page1} from "./components/home/page1";
-import {Mingle} from "./components/home/mingle";
-import React from "react";
-import {Homepage} from "./components/home/Home";
-import {Desktop} from "./components/home/Destop";
+
+import Rank from "./components/rank";
 
 
 const theme = createTheme({
@@ -63,19 +60,8 @@ class AppLoc extends AuthComponent<AppProps, AuthState>
                     <Switch>
                         <Route path="/chat/:chatId"><Chat/></Route>
                         <Route path="/chat"><Swiper/></Route>
-                        <Route path="/set_token/">
-                            <HandleToken/>
-                        </Route>
-                        <Route path="/mingle/" component={Mingle} />
-                        <Route path="/page1/">
-                            <Page1 showBanner={true}/>
-                        </Route>
-                        <Route path="/">
-                            {(this.state.width < 768) ?
-                                <Homepage/>
-                                : <Desktop/>
-                            }
-                        </Route>
+                        <Route path="/set_token/" component={HandleToken} />
+                        <Route path="/" component={Rank} />
                     </Switch>
                 </ThemeProvider>
             </div>

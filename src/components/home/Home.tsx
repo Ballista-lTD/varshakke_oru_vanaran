@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-import bgimg from "./home_love.png";
-import bg2 from "./love2.png";
+import bgimg from "../../images/home_love.png";
+import bg2 from "../../images/love2.png";
 import Slider from "../utils/slider/slider";
 import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
 import {withRouter} from "react-router";

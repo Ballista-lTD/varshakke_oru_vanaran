@@ -10,7 +10,7 @@ import localForage from "localforage";
 
 
 const client_id = "V2EFP5NXXHNLkL1fLHzTJdcwtwSbP9h6jPCpp9vd";
-export const reactUrl = "https://minglikko.com";
+export const reactUrl = process.env.REACT_URL;
 
 const redirect_uri = reactUrl + "/set_token/";
 
