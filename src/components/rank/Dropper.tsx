@@ -22,8 +22,7 @@ export function Dropper({list, droppableId}: {list: PartnerTokenObject[], droppa
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging, provided.draggableProps.style)}
+                                        style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
                                     >
                                         <div
                                             style={{
