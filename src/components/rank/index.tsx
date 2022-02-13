@@ -6,13 +6,12 @@ import {toast} from "react-toastify";
 import {withRouter} from "react-router";
 import Loader from "react-loader-spinner";
 import {Container} from "@mui/material";
-import {DragDropContext, Droppable, Draggable, DropResult} from "react-beautiful-dnd";
-import {getItemStyle, getListStyle, move, reorder} from "./utils";
+import {DragDropContext, DropResult} from "react-beautiful-dnd";
+import {move, reorder} from "./utils";
 import {Dropper} from "./Dropper";
 
 
 interface RankState extends AuthState {
-    priority: string[]
     partnerList: PartnerTokenObject[]
     selectedTokens: PartnerTokenObject[]
     ready: boolean
@@ -46,7 +45,11 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
     {
         try
         {
-            await PartnerToken.modify({priority: this.state.priority});
+            const priority = [
+                ...this.state.selectedTokens.map(({name}) => name),
+                ...this.state.partnerList.map(({name}) => name)
+            ];
+            await PartnerToken.modify({priority});
             toast.success("Ok set 14 midnight ne vanne chat cheyth polikke");
         }
         catch (e)
@@ -79,7 +82,11 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
         else 
         {
             const {sourceClone, destClone} = move(
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 this.state[source.droppableId],
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 this.state[destination.droppableId],
                 source,
                 destination
@@ -102,8 +109,6 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
             return <></>;
         }
 
-        console.log(this.state.ready);
-
         if(!this.state.ready)
             return (
                 <Container className="mt-5 pt-5">
@@ -113,8 +118,10 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
         return (
             <>
+                <button onClick={this.handleSubmit}>Submit</button>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Dropper list={this.state.selectedTokens} droppableId={"selectedTokens"}/>
+                    <hr />
                     <Dropper list={this.state.partnerList} droppableId={"partnerList"}/>
                 </DragDropContext>
             </>

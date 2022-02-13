@@ -1,6 +1,9 @@
+import { DraggableLocation, DraggingStyle, NotDraggingStyle} from "react-beautiful-dnd";
+import {CSSProperties} from "react";
+
 const grid = 8;
 
-export const getItemStyle = (isDragging, draggableStyle) => ({
+export const getItemStyle = (isDragging: boolean, draggableStyle: DraggingStyle | NotDraggingStyle | undefined): CSSProperties => ({
     // some basic styles to make the items look a bit nicer
     userSelect: "none",
     padding: grid * 2,
@@ -13,13 +16,13 @@ export const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle
 });
 
-export const getListStyle = isDraggingOver => ({
+export const getListStyle = (isDraggingOver: boolean): CSSProperties => ({
     background: isDraggingOver ? "lightblue" : "lightgrey",
     padding: grid,
     width: 250
 });
 
-export const reorder = (list, startIndex, endIndex) => 
+export const reorder = (list: Iterable<unknown> | ArrayLike<unknown>, startIndex: number, endIndex: number) => 
 {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -28,7 +31,7 @@ export const reorder = (list, startIndex, endIndex) =>
     return result;
 };
 
-export const move = (source, destination, droppableSource, droppableDestination) => 
+export const move = (source: Iterable<unknown> | ArrayLike<unknown>, destination: Iterable<unknown> | ArrayLike<unknown>, droppableSource: DraggableLocation, droppableDestination: DraggableLocation) =>
 {
     const sourceClone = Array.from(source);
     const destClone = Array.from(destination);
