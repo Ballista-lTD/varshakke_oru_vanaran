@@ -114,8 +114,8 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
         return (
             <>
                 <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Dropper list={this.state.partnerList} droppableId={"partnerList"}/>
                     <Dropper list={this.state.selectedTokens} droppableId={"selectedTokens"}/>
+                    <Dropper list={this.state.partnerList} droppableId={"partnerList"}/>
                 </DragDropContext>
             </>
         );

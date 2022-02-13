@@ -10,8 +10,8 @@ export function Dropper({list, droppableId}: {list: PartnerTokenObject[], droppa
                 <div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)} >
                     {list.length > 0 && list.map((item, index) => (
                         <Draggable
-                            key={item.id}
-                            draggableId={String(item.id)}
+                            key={item.name}
+                            draggableId={String(item.name)}
                             index={index}>
                             {(provided, snapshot) => (
                                 <div>
