@@ -19,8 +19,8 @@ import {baseUrl, patch} from "../../api/api";
 export const filterButtons = [
     {icon: "🧠", key: "intelligence"},
     {icon: "💪", key: "strength"},
-    {icon: "✨", key: "beauty"},
-    {icon: "🙏", key: "charisma"},
+    {icon: "💄", key: "beauty"},
+    {icon: "✨", key: "charisma"},
     {icon: "🤑", key: "wealth"},
     {icon: "🤝", key: "will_help_poor"},
     {icon: "🙏", key: "religiousity"},
@@ -212,6 +212,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
                     </Fab>
                     <Container>
                         {filterButtons.find(({key}) => key === this.state.filterKey)?.icon}
+                        {filterButtons.find(({key}) => key === this.state.filterKey)?.key}
                         <Slider
                             hidden={!this.state.slider}
                             getAriaLabel={() => "Filter Points"}
