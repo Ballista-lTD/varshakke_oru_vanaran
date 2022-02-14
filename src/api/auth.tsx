@@ -268,11 +268,11 @@ export class HandleTokenLoc extends AuthComponent<AuthPropsLoc, AuthState>
                 setObj("user", response.results[0]);
                 if (location)
 
-                    this.props.history.push("/page1");
+                    this.props.history.push("/mingle");
 
                 else
 
-                    this.props.history.push("/page1");
+                    this.props.history.push("/mingle");
 
             }).catch(() => 
             {
