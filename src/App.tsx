@@ -15,6 +15,7 @@ import Chat from "./components/Chat";
 import Swiper from "./components/Chat/Swiper";
 
 import Rank from "./components/rank";
+import {Homepage} from "./components/home/Home";
 
 
 const theme = createTheme({
@@ -61,7 +62,9 @@ class AppLoc extends AuthComponent<AppProps, AuthState>
                         <Route path="/chat/:chatId"><Chat/></Route>
                         <Route path="/chat"><Swiper/></Route>
                         <Route path="/set_token/" component={HandleToken} />
-                        <Route path="/" component={Rank} />
+                        <Route path="/mingle" component={Rank} />
+                        <Route path="/" component={Homepage} />
+
                     </Switch>
                 </ThemeProvider>
             </div>
