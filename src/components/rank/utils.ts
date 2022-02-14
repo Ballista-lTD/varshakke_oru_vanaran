@@ -41,3 +41,17 @@ export const move = (source: Iterable<unknown> | ArrayLike<unknown>, destination
 
     return {sourceClone, destClone};
 };
+
+export function unique<T>(arr: T[])
+{
+    const u: Record<symbol, unknown> = {}, a: T[] = [];
+
+    for(let i = 0, l = arr.length; i < l; ++i)
+        if(!u.hasOwnProperty(arr[i] as unknown as symbol))
+        {
+            a.push(arr[i]);
+            u[arr[i] as unknown as symbol] = 1;
+        }
+    
+    return a;
+}

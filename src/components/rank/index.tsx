@@ -5,14 +5,16 @@ import {PartnerToken, PartnerTokenObject} from "../../api/model";
 import {toast, ToastContainer} from "react-toastify";
 import {withRouter} from "react-router";
 import Loader from "react-loader-spinner";
-import {Container} from "@mui/material";
+import {Container, Fab} from "@mui/material";
 import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {move, reorder} from "./utils";
 import {Dropper} from "./Dropper";
 import IconButton from "@mui/material/IconButton";
+import NavigationIcon from "@mui/icons-material/Navigation";
 
 import Slider from "@mui/material/Slider";
 import {baseUrl, patch} from "../../api/api";
+import {uniq} from "lodash";
 
 
 export const filterButtons = [
@@ -73,13 +75,13 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
     {
         try 
         {
-            const priority = [
+            const priority = uniq<string>([
                 ...this.state.selectedTokens.map(({name}) => name),
-                ...this.state.partnerList.map(({name}) => name)
-            ];
+                ...this.state.unFilteredPartners.map(({name}) => name)
+            ]);
 
             const headers = {"Authorization": `Bearer ${getAuth()}`};
-            await patch(`${baseUrl}/auth/token/${this.state.user?.tokens.id}`, {priority}, headers);
+            await patch(`${baseUrl}/auth/token/${this.state.user?.tokens.id}/`, {priority}, headers);
 
             toast("Ok set 14 midnight ne vanne chat cheyth polikke. Venam enkil page refresh cheyth again option register cheyyam.");
         }
@@ -136,7 +138,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
     {
         this.setState({filters: {...this.state.filters, [this.state.filterKey]: [min, max]}});
 
-        let filtered = this.state.unFilteredPartners.filter(x => this.state.selectedTokens.indexOf(x) === -1);
+        let filtered = this.state.unFilteredPartners.filter(x => !this.state.selectedTokens.find(({name}) => name === x.name));
 
         Object.keys(this.state.filters).forEach((key) => 
         {
@@ -153,8 +155,8 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
     moveUp = () =>
     {
-        const selected = [...this.state.selectedTokens, ...this.state.partnerList.slice(0, 20)];
-        this.setState({partnerList: [...this.state.partnerList.slice(20)], selectedTokens: selected});
+        const selected = [...this.state.selectedTokens, ...this.state.partnerList];
+        this.setState({partnerList: [], selectedTokens: selected});
         const [min, max] = this.state.filters[this.state.filterKey];
         this.filterEntries(min, max);
     };
@@ -204,7 +206,11 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
                             </IconButton>
                         ))}
                     </div>
-
+                    <Fab variant="extended" color="primary" className="position-fixed" sx={{bottom: "20px", right: "10px"}}
+                        onClick={this.moveUp}>
+                        <NavigationIcon sx={{ mr: 1 }} />
+                        Add Current
+                    </Fab>
                     <Container>
                         {filterButtons.find(({key}) => key === this.state.filterKey)?.icon}
                         {filterButtons.find(({key}) => key === this.state.filterKey)?.key}
