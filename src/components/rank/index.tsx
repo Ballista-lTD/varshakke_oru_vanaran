@@ -153,12 +153,13 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
         this.setState({partnerList: filtered});
     };
 
-    moveUp()
+    moveUp = () =>
     {
         const selected = [...this.state.selectedTokens, ...this.state.partnerList.slice(0, 20)];
         this.setState({partnerList: [], selectedTokens: selected});
-        this.filterEntries(this.state., 5);
-    }
+        const [min, max] = this.state.filters[this.state.filterKey];
+        this.filterEntries(min, max);
+    };
 
     render() 
     {
