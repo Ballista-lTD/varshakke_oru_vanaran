@@ -63,12 +63,15 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
     async componentDidMount() 
     {
         super.componentDidMount();
-        if (!this.state.user?.tokens)
-            return this.performAuth();
+
 
         const {results} = await PartnerToken.filter({}, true);
 
-        this.setState({partnerList: results, unFilteredPartners: results, ready: true});
+        this.setState({partnerList: results, unFilteredPartners: results, ready: true}, ()=>
+        {
+            if (!this.state.user?.tokens)
+                return this.performAuth();
+        });
     }
 
     handleSubmit = async () => 
