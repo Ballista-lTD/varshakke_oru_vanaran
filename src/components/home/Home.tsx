@@ -82,7 +82,7 @@ const names = [
     "Cisgender Woman"
 ];
 
-function getStyles(name: string, personName: string | any[], theme: Theme)
+function getStyles(name: string, personName: string | any[], theme: Theme) 
 {
     return {
         fontWeight:
@@ -92,12 +92,12 @@ function getStyles(name: string, personName: string | any[], theme: Theme)
     };
 }
 
-function MultipleSelect()
+function MultipleSelect() 
 {
     const theme = useTheme();
     const [personName, setPersonName] = React.useState([]);
 
-    const handleChange = (event: { target: { value: any; }; }) =>
+    const handleChange = (event: { target: { value: any; }; }) => 
     {
         const {
             target: {value},
@@ -157,6 +157,17 @@ export class Balloon extends React.Component
 
 export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState> 
 {
+
+    constructor(props:AuthPropsLoc)
+    {
+        super(props);
+        localStorage.clear();
+        this.state = {
+            ...this.state,
+            user:null
+        };
+    }
+
     render() 
     {
         return (

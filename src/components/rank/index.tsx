@@ -62,7 +62,6 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
     async componentDidMount() 
     {
         super.componentDidMount();
-        this.refreshAuth();
         if (!this.state.user?.tokens)
             return this.performAuth();
 
