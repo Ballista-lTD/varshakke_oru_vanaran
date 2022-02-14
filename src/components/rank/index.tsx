@@ -163,11 +163,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
     render() 
     {
-        if (!this.state.user) 
-        {
-            this.performAuth();
-            return <></>;
-        }
+
 
         if (!this.state.ready)
             return (
