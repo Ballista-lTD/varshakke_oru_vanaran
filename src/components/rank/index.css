@@ -19,13 +19,28 @@
 
 .rank_width {
     width: fit-content !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #E27940;
 }
 
 .rank_text {
-    font-family: Poppins;
+    font-family: Poppins, serif;
     font-style: normal;
     font-weight: 500;
     color: #949494;
 }
 
+.rank_submit{
+    align-self: center;
+    width: 90%;
+    height: 40px;
+    background-color: #E27940;
+    color: #FFEFE4;
+    font-size: larger;
+    font-weight: bolder;
+    font-family: Poppins, serif;
+    border-radius: 5px;
+}
 

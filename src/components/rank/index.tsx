@@ -1,19 +1,22 @@
 import "./index.css";
 
-import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
+import {AuthComponent, AuthPropsLoc, AuthState, getAuth} from "../../api/auth";
 import {PartnerToken, PartnerTokenObject} from "../../api/model";
-import {toast} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import {withRouter} from "react-router";
 import Loader from "react-loader-spinner";
-import {Container} from "@mui/material";
+import {Container, Fab} from "@mui/material";
 import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {move, reorder} from "./utils";
 import {Dropper} from "./Dropper";
 import IconButton from "@mui/material/IconButton";
+import NavigationIcon from "@mui/icons-material/Navigation";
+
 import Slider from "@mui/material/Slider";
+import {baseUrl, patch} from "../../api/api";
 
 
-const filterButtons = [
+export const filterButtons = [
     {icon: "🧠", key: "intelligence"},
     {icon: "💪", key: "strength"},
     {icon: "✨", key: "beauty"},
@@ -76,12 +79,15 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
                 ...this.state.selectedTokens.map(({name}) => name),
                 ...this.state.partnerList.map(({name}) => name)
             ];
-            await PartnerToken.modify({priority});
-            toast.success("Ok set 14 midnight ne vanne chat cheyth polikke");
+
+            const headers = {"Authorization": `Bearer ${getAuth()}`};
+            await patch(`${baseUrl}/auth/token/${this.state.user?.tokens.id}`, {priority}, headers);
+
+            toast("Ok set 14 midnight ne vanne chat cheyth polikke. Venam enkil page refresh cheyth again option register cheyyam.");
         }
         catch (e) 
         {
-            toast.error("Sathyathil prashnam enikk ano atho ninekko ?");
+            toast.error("Sathyathil prashnam enikk ano atho thanikko ?");
         }
     };
 
@@ -130,10 +136,9 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
     filterEntries = (min: number, max: number) =>
     {
-        console.log(min, max);
         this.setState({filters: {...this.state.filters, [this.state.filterKey]: [min, max]}});
 
-        let filtered = this.state.unFilteredPartners;
+        let filtered = this.state.unFilteredPartners.filter(x => this.state.selectedTokens.indexOf(x) === -1);
 
         Object.keys(this.state.filters).forEach((key) => 
         {
@@ -142,8 +147,18 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
                 filtered = filtered.filter((obj) => obj.getValue(key) >= lower && obj.getValue(key) <= upper);
         });
 
+        filtered.sort((a, b) =>
+            a.getValue(this.state.filterKey) > b.getValue(this.state.filterKey) ? -1 : 1);
+
         this.setState({partnerList: filtered});
     };
+
+    moveUp()
+    {
+        const selected = [...this.state.selectedTokens, ...this.state.partnerList.slice(0, 20)];
+        this.setState({partnerList: [], selectedTokens: selected});
+        this.filterEntries(this.state., 5);
+    }
 
     render() 
     {
@@ -162,35 +177,54 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
 
         return (
             <>
-                <div className="d-flex flex-row justify-content-between">
-                    <h6 className="p-1 m-2" style={{color: "#949494"}}>Select Your Priority</h6>
-                    <button className="p-1 m-2" onClick={this.handleSubmit} style={{borderRadius:"6px", backgroundColor:"#F0F0F0"}}>SUBMIT</button>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={15000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
+                <div className="d-flex flex-row justify-content-center">
+                    <button className="p-1 m-2 rank_submit" onClick={this.handleSubmit}>SUBMIT</button>
                 </div>
-                <Container className="rank_filter_container w-75">
-                    {filterButtons.map(({icon, key}, index) => (
-                        <IconButton key={index}
-                            onClick={() => this.setState({filterKey: key, slider: this.state.filterKey !== key})}>
-                            {index !== 0 && "|"} {icon}
-                        </IconButton>
-                    ))}
-                    <Slider
-                        hidden={!this.state.slider}
-                        getAriaLabel={() => "Filter Points"}
-                        value={this.state.filters[this.state.filterKey]}
-                        onChange={(e, value) => typeof value !== "number" &&
-                            this.filterEntries(value[0], value[1])}
-                        valueLabelDisplay="auto"
-                        min={0}
-                        max={5}
-                        step={1}
-                        disableSwap
-                    />
-
-                </Container>
-                <hr/><hr/>
                 <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Dropper list={this.state.selectedTokens} droppableId={"selectedTokens"}/>
-                    <hr/>
+                    <Dropper list={this.state.selectedTokens} droppableId={"selectedTokens"} noMaxSize/>
+                    <div className="rank_filter_container w-100">
+                        <h5>Filters</h5>
+                        {filterButtons.map(({icon, key}, index) => (
+                            <IconButton key={index}
+                                onClick={() => this.setState({
+                                    filterKey: this.state.filterKey !== key ? key : ".",
+                                    slider: this.state.filterKey !== key})
+                                }>
+                                {index !== 0 && "|"} {icon}
+                            </IconButton>
+                        ))}
+                    </div>
+                    <Fab variant="extended" color="primary" className="position-fixed" sx={{bottom: "20px", right: "10px"}}
+                        onClick={this.moveUp}>
+                        <NavigationIcon sx={{ mr: 1 }} />
+                        Add Current
+                    </Fab>
+                    <Container>
+                        {filterButtons.find(({key}) => key === this.state.filterKey)?.icon}
+                        <Slider
+                            hidden={!this.state.slider}
+                            getAriaLabel={() => "Filter Points"}
+                            value={this.state.filters[this.state.filterKey]}
+                            onChange={(e, value) => typeof value !== "number" &&
+                                this.filterEntries(value[0], value[1])}
+                            valueLabelDisplay="auto"
+                            min={0}
+                            max={5}
+                            step={1}
+                            disableSwap
+                        />
+                    </Container>
                     <Dropper list={this.state.partnerList} droppableId={"partnerList"}/>
                 </DragDropContext>
             </>
