@@ -80,6 +80,7 @@ export function Dropper({list, droppableId, noMaxSize}: {list: PartnerTokenObjec
                     {display.length > 0 && display.map((item, index) =>
                         <Card item={item} index={index} key={index}/>)}
                     {display.length === 0 && <h3 className="p-5">Drag Cards here to create priority list</h3>}
+                    {provided.placeholder}
                 </div>
             )}
         </Droppable>

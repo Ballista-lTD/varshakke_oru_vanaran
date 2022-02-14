@@ -5,12 +5,11 @@ import {PartnerToken, PartnerTokenObject} from "../../api/model";
 import {toast, ToastContainer} from "react-toastify";
 import {withRouter} from "react-router";
 import Loader from "react-loader-spinner";
-import {Container, Fab} from "@mui/material";
+import {Container} from "@mui/material";
 import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {move, reorder} from "./utils";
 import {Dropper} from "./Dropper";
 import IconButton from "@mui/material/IconButton";
-import NavigationIcon from "@mui/icons-material/Navigation";
 
 import Slider from "@mui/material/Slider";
 import {baseUrl, patch} from "../../api/api";
@@ -155,7 +154,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
     moveUp = () =>
     {
         const selected = [...this.state.selectedTokens, ...this.state.partnerList.slice(0, 20)];
-        this.setState({partnerList: [], selectedTokens: selected});
+        this.setState({partnerList: [...this.state.partnerList.slice(20)], selectedTokens: selected});
         const [min, max] = this.state.filters[this.state.filterKey];
         this.filterEntries(min, max);
     };
@@ -205,11 +204,7 @@ class RankLoc extends AuthComponent<AuthPropsLoc, RankState>
                             </IconButton>
                         ))}
                     </div>
-                    <Fab variant="extended" color="primary" className="position-fixed" sx={{bottom: "20px", right: "10px"}}
-                        onClick={this.moveUp}>
-                        <NavigationIcon sx={{ mr: 1 }} />
-                        Add Current
-                    </Fab>
+
                     <Container>
                         {filterButtons.find(({key}) => key === this.state.filterKey)?.icon}
                         {filterButtons.find(({key}) => key === this.state.filterKey)?.key}
