@@ -79,7 +79,7 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
 
         const friend = this.state.user.tokens.chat_friends[0];
 
-        this.onMessage(await localForage.getItem(`messages-${this.state.chatUser?.token}`) || []);
+        this.onMessage(await localForage.getItem("messages-transferred") || []);
         this.setState({
             connection: new SignalConnection(this.state.user.tokens.private_token,
                 friend.token, friend.bundle, this.onMessage)
