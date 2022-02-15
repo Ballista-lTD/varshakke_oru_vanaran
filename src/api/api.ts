@@ -18,11 +18,9 @@ export async function get(url: string, kwargs = {}, headers = {})
         throw (response);
     
     else
-    {
-
-        console.log(response);
+    
         return response.json();
-    }
+    
 }
 
 export async function post(url: RequestInfo, kwargs = {}, headers = {})
@@ -37,15 +35,10 @@ export async function post(url: RequestInfo, kwargs = {}, headers = {})
     }
     );
     if (response.status > 300)
-    
         throw (response);
-    
-    else
-    {
 
-        console.log(response);
-        return response.json();
-    }
+    return response.json();
+    
 }
 
 export async function patch(url: RequestInfo, kwargs = {}, headers = {})
@@ -76,14 +69,9 @@ export async function filePost(url: RequestInfo, formData: FormData, headers = {
     }
     );
     if (response.status > 300)
-    
         throw (response);
-    
-    else
-    {
-        console.log(response);
-        return response.json();
-    }
+
+    return response.json();
 }
 
 
@@ -183,10 +171,7 @@ export default class Model
         let headers = {};
 
         if (auth)
-        
             headers = {"Authorization": `Bearer ${getAuth()}`};
-        
-
 
         const data = await get(`${this.baseurl}${id}/`, kwargs, headers);
         return new this.modelClass(data, this.baseurl);
@@ -212,27 +197,6 @@ export default class Model
             throw e;
         }
     };
-    /*path doesn't need /
-    * */
-    action_general = async (path: string, kwargs = {}, auth = false) =>
-    {
-        try
-        {
-            let headers = {};
-            if (auth)
-                headers = {"Authorization": `Bearer ${getAuth()}`};
-
-            const data = await get(`${this.baseurl}${path}`, kwargs, headers);
-            const lst = data.results.map((item: ModelData) => new this.modelClass(item, this.baseurl));
-
-            return {results: lst, next: data.next};
-        }
-        catch (e)
-        {
-            throw e;
-        }
-    };
-
 
     /**
      * @param {{}} kwargs
@@ -243,20 +207,6 @@ export default class Model
         {
             const headers = {"Authorization": `Bearer ${getAuth()}`};
             const data = await post(`${this.baseurl}`, kwargs, headers);
-            return new this.modelClass(data, this.baseurl);
-        }
-        catch (e)
-        {
-            throw await (e as { json: () => Promise<unknown> }).json();
-        }
-    }
-
-    async action_post(path: string, kwargs = {})
-    {
-        try
-        {
-            const headers = {"Authorization": `Bearer ${getAuth()}`};
-            const data = await post(`${this.baseurl}${path}`, kwargs, headers);
             return new this.modelClass(data, this.baseurl);
         }
         catch (e)

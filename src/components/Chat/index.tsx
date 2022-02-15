@@ -54,12 +54,9 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
     {
         super(props);
 
-        const chatUser = this.state.user?.chat_friends?.find((friend) => friend.token === this.props.match.params.chatId);
-
         this.state = {
             ...this.state,
             chat: "",
-            chatUser,
             messages: [],
             showPicker: false,
         };
@@ -73,13 +70,19 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
     {
         super.componentDidMount();
 
-        if (!this.state.auth || !this.state.user?.tokens?.private_token || !this.state.chatUser?.token)
+        await this.refreshAuth();
+
+        if (!this.state.user?.tokens?.private_token || !this.state.user?.tokens?.chat_friends?.[0])
             return this.performAuth();
 
-        this.onMessage(await localForage.getItem(`messages-${this.state.chatUser.token}`) || []);
+        this.setState({chatUser: this.state.user.tokens.chat_friends[0]});
 
+        const friend = this.state.user.tokens.chat_friends[0];
+
+        this.onMessage(await localForage.getItem(`messages-${this.state.chatUser?.token}`) || []);
         this.setState({
-            connection: new SignalConnection(this.state.user.tokens.private_token, this.state.chatUser.token, this.onMessage)
+            connection: new SignalConnection(this.state.user.tokens.private_token,
+                friend.token, friend.bundle, this.onMessage)
         });
     }
 
@@ -157,7 +160,7 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
                     }}>
                         <p style={{margin: ".5rem", fontSize: "10px", color: "#A1A1BC"}}>Message Now</p>
 
-                        {this.state.messages.map(({content, type, time, attachment, mime}, i) =>
+                        {this.state.messages.map(({content, type, time, attachment}, i) =>
                         {
 
                             const next = this.state.messages[i + 1];
@@ -165,7 +168,6 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
                             const corner_top = (prev?.type === type) ? "8px" : "25px";
                             const corner_bottom = (next?.type === type) ? "8px" : "25px";
 
-                            console.log(mime);
                             const border: CSSProperties = type !== "sent" ? {
                                 borderTopLeftRadius: corner_top,
                                 borderBottomLeftRadius: corner_bottom,
@@ -256,11 +258,9 @@ class ChatLoc extends AuthComponent<AuthPropsLoc, ChatState>
                         background: "#fff",
                     }}
                 >
-                    <IconButton sx={{p: "10px"}} aria-label="menu">
-                        <SentimentSatisfiedAltIcon onClick={() =>
-                        {
-                            this.setState({showPicker: !this.state.showPicker});
-                        }}/>
+                    <IconButton sx={{p: "10px"}} aria-label="menu"
+                        onClick={() => this.setState({showPicker: !this.state.showPicker})}>
+                        <SentimentSatisfiedAltIcon />
                     </IconButton>
                     <InputBase
                         sx={{ml: 1, flex: 1}}

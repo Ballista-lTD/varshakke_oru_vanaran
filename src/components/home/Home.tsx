@@ -2,7 +2,7 @@ import "./style.css";
 import bgimg from "../../images/home_love.png";
 import bg2 from "../../images/love2.png";
 import Slider from "../utils/slider/slider";
-import {AuthComponent, AuthPropsLoc, AuthState} from "../../api/auth";
+import {AuthComponent, AuthPropsLoc, AuthState, getAuth} from "../../api/auth";
 import {withRouter} from "react-router";
 
 export function Balloon()
@@ -27,11 +27,16 @@ export class HomepageLoc extends AuthComponent<AuthPropsLoc, AuthState>
     constructor(props:AuthPropsLoc)
     {
         super(props);
-        localStorage.clear();
-        this.state = {
-            ...this.state,
-            user:null
-        };
+    }
+
+    componentDidMount() 
+    {
+        super.componentDidMount();
+
+        if(!getAuth())
+            this.performAuth();
+        else
+            this.refreshAuth().then();
     }
 
     render() 

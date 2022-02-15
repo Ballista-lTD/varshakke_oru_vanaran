@@ -110,9 +110,8 @@ export type AuthPropsLoc = RouteComponentProps<Record<string, string | undefined
 export interface Friend {
     token: string,
     name: string,
-    email: string,
-    profile: string,
-    last_seen?: string,
+    last_seen?: string
+    bundle: boolean
 }
 
 
@@ -121,6 +120,7 @@ type token = {
     private_token: string,
     user: number,
     total: number
+    chat_friends?: Friend[]
 }
 
 export interface AuthState extends ResponsiveState {
@@ -136,7 +136,6 @@ export interface AuthState extends ResponsiveState {
         first_name: string,
         last_name: string,
         friends?: Friend[],
-        chat_friends?: Friend[],
         invited?: Friend[]
     } | null
 }
@@ -220,12 +219,12 @@ export class AuthComponent<P, S extends AuthState>
             refresh_token: refresh_token,
             response_type: "token"
         };
-        post(`${baseUrl}/auth/o/token/`, kwargs).then((response) => 
+        return post(`${baseUrl}/auth/o/token/`, kwargs).then((response) =>
         {
             setRefresh(response.refresh_token);
             setAuth(response.access_token);
             timer = Date.now();
-            post(`${baseUrl}/auth/users/me/`, {}, {"Authorization": `Bearer ${response.access_token}`}).then((response) => 
+            return post(`${baseUrl}/auth/users/me/`, {}, {"Authorization": `Bearer ${response.access_token}`}).then((response) =>
             {
                 setObj("user", response.results[0]);
             });
